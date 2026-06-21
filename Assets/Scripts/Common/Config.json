@@ -1,0 +1,7 @@
+{
+  "SOContainerGenerator": {
+    "FolderPath": "Assets/Scripts/Core/Generated/",
+    "Namespace": "MI.Core.Generated",
+    "MenuName": "Common/SOContainer"
+  }
+}
