@@ -2,18 +2,21 @@ using UnityEngine;
 
 namespace Core
 {
-    public class MoleculeSpawner : MonoBehaviour
+    public class MoleculeSpawner : GenericSpawner
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        [SerializeField] private Transform spawnedObjectsParent;
+        [SerializeField] private Molecule moleculePrefab;
         void Start()
         {
-        
+            SpawnMolecule();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void SpawnMolecule()
         {
-        
+            var randomPoint = GetRandomPointInSpawnArea();
+            var molecule = Instantiate(moleculePrefab, randomPoint, Quaternion.identity);
+            molecule.transform.SetParent(spawnedObjectsParent);
+            molecule.Init();
         }
     }
 }

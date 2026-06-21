@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04440c496640bdf4fa40c17547aff1f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::SOContainerContainer
+  ingameLevelRequirementSOContainer: {fileID: 11400000, guid: 393f985bf9a966d4792fd1c749cd835d, type: 2}
 --- !u!1 &1715294128
 GameObject:
   m_ObjectHideFlags: 0

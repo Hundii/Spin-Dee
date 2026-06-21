@@ -4,6 +4,6 @@ namespace Core
 {
     public interface IHarvestable
     {
-        public float Harvest();
+        public bool Harvest(out float value);
     }
 }

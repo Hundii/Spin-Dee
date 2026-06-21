@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4355582391632757911}
   - component: {fileID: 4546576286507412510}
+  - component: {fileID: 586727286984868588}
   - component: {fileID: 1565269326170059204}
   - component: {fileID: 5635393728604874937}
   m_Layer: 0
@@ -64,6 +65,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!114 &586727286984868588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818063575116265846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c1385592bf3844db4e00ea1fcdf238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Core.Capsule
 --- !u!114 &1565269326170059204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,10 +169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3048e36d22af14fa7060b9746fee15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Harvester
-  harvestCooldown: 10
-  cooldownMultiplierInside: 1.25
-  cooldownBonusAfterLeavingPercentage: 15
-  currentCooldown: 0
+  harvestCooldown: 1
+  cooldownMultiplierInside: 0.5
+  cooldownBonusAfterLeavingPercentage: 22.5
+  cooldownBonusAfterLeavingFlatAmount: 0.2
 --- !u!1 &8290640887181387266
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,10 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3048e36d22af14fa7060b9746fee15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Harvester
-  harvestCooldown: 10
+  harvestCooldown: 1
   cooldownMultiplierInside: 1.25
   cooldownBonusAfterLeavingPercentage: 15
-  currentCooldown: 0
+  cooldownBonusAfterLeavingFlatAmount: 0.1
 --- !u!1 &8841795657853727335
 GameObject:
   m_ObjectHideFlags: 0

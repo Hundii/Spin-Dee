@@ -85,9 +85,9 @@ namespace Common
             }
             catch (System.Exception e)
             {
-                CustomLogger.LogError("File creation failed");
-                CustomLogger.LogError(e.Message);
-                CustomLogger.LogError(content.ToString());
+                Debug.LogError("File creation failed");
+                Debug.LogError(e.Message);
+                Debug.LogError(content.ToString());
             }
         }
 #endif

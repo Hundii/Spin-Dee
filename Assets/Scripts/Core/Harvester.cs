@@ -1,3 +1,4 @@
+using Common;
 using UnityEngine;
 
 namespace Core
@@ -5,10 +6,13 @@ namespace Core
     public class Harvester : MonoBehaviour
     {
         [SerializeField] private float harvestCooldown = 1f;
-        [SerializeField] private float cooldownMultiplierInside = 1.25f;
+        [SerializeField] private float cooldownMultiplierInside = 0.5f;
         [SerializeField] private float cooldownBonusAfterLeavingPercentage = 15f;
+        [SerializeField] private float cooldownBonusAfterLeavingFlatAmount = 0.1f;
 
-        public float currentCooldown;
+        private float currentCooldown;
+
+        public GameEvent<float> MaterialHarvested { get; private set; } = new();
 
         private void Start()
         {
@@ -21,7 +25,10 @@ namespace Core
             {
                 if (ModifyCooldown(Time.deltaTime))
                 {
-                    HarvestAmount(harvestable.Harvest());
+                    if (harvestable.Harvest(out var value))
+                    {
+                        HarvestAmount(value);
+                    }
                 }
             }
         }
@@ -32,7 +39,10 @@ namespace Core
             {
                 if(ModifyCooldown(Time.deltaTime * cooldownMultiplierInside))
                 {
-                    HarvestAmount(harvestable.Harvest());
+                    if (harvestable.Harvest(out var value))
+                    {
+                        HarvestAmount(value);
+                    }
                 }
             }
         }
@@ -41,9 +51,12 @@ namespace Core
         {
             if (collider.gameObject.TryGetComponent(out IHarvestable harvestable))
             {
-                if (ModifyCooldown(harvestCooldown * (cooldownBonusAfterLeavingPercentage / 100)))
+                if (ModifyCooldown(cooldownBonusAfterLeavingFlatAmount +  harvestCooldown * (cooldownBonusAfterLeavingPercentage / 100)))
                 {
-                    HarvestAmount(harvestable.Harvest());
+                    if (harvestable.Harvest(out var value))
+                    {
+                        HarvestAmount(value);
+                    }
                 }
             }
         }
@@ -61,7 +74,7 @@ namespace Core
 
         private void HarvestAmount(float amount)
         {
-            Debug.Log($"Harvested {amount}");
+            MaterialHarvested.Invoke(amount);
         }
     }
 }
