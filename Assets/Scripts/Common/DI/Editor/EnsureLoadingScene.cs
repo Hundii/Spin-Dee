@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Common.Editor
@@ -18,10 +19,11 @@ namespace Common.Editor
         {
             if (state == PlayModeStateChange.ExitingEditMode)
             {
+
                 var sceneName = SceneManager.GetActiveScene().name;
 
                 SceneLoadHelper helper = AssetDatabase.LoadAssetAtPath<SceneLoadHelper>(
-                    "Assets/Resources/SO/SceneLoading/SceneLoadingHelper.asset");
+                    "Assets/Resources/SO/SceneHelper/SceneLoadingHelper.asset");
 
                 if (!sceneName.Equals(LoadingSceneName))
                 {
