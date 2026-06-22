@@ -9,6 +9,7 @@ namespace Core
         void Start()
         {
             SpawnMolecule();
+            SpawnMolecule();
         }
 
         public void SpawnMolecule()

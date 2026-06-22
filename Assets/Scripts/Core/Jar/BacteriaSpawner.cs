@@ -10,6 +10,10 @@ namespace Core
         void Start()
         {
             SpawnBacteria();
+            SpawnBacteria();
+            SpawnBacteria();
+            SpawnBacteria();
+            SpawnBacteria();
         }
 
         public void SpawnBacteria()

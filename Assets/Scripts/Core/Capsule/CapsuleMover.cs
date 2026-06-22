@@ -8,6 +8,7 @@ namespace Core
     public class CapsuleMover : MonoBehaviour
     {
         [SerializeField] private float moveSpeed;
+        [SerializeField] private LayerMask groundLayer;
 
         private Rigidbody rb;
 
@@ -34,7 +35,7 @@ namespace Core
 
         private void DoMove()
         {
-            Vector3 movement = new(-moveInput.x, 0f, -moveInput.y);
+            Vector3 movement = new(moveInput.x, 0f, moveInput.y);
 
             rb.MovePosition(
                 rb.position +
@@ -51,6 +52,14 @@ namespace Core
         {
             inputActions.Player.Move.performed -= HandleMove;
             inputActions.Player.Move.canceled -= HandleMove;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if ((groundLayer.value & (1 << collision.gameObject.layer)) != 0)
+            {
+                rb.constraints |= RigidbodyConstraints.FreezePositionY;
+            }
         }
 
     }

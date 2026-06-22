@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 4293462103818809018}
   - component: {fileID: 7900147686129589707}
   - component: {fileID: 2949276008240859198}
-  m_Layer: 0
+  - component: {fileID: -5495236006271886963}
+  - component: {fileID: 4507634534078832316}
+  m_Layer: 9
   m_Name: Bacteria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,8 +47,8 @@ Rigidbody:
   m_GameObject: {fileID: 259407305997185464}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0.1
-  m_AngularDamping: 0.05
+  m_LinearDamping: 0.4
+  m_AngularDamping: 0.2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -60,9 +62,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &2949276008240859198
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -70,7 +72,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259407305997185464}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3701a6a6f99c54d46af8fa42cb96fccd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -84,6 +86,55 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.87
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &-5495236006271886963
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259407305997185464}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.6
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.37
+  m_BaseOffset: 0.84
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 3
+--- !u!114 &4507634534078832316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259407305997185464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45c8bddfce899d419235cf9cc1a6a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Core.Microbe
+  moveSpeed: 1.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  wanderRadius: 1
+  wanderPositionUpdateFrequencyPerSecond: 0.75
+  searchFrequencyPerSecond: 10
+  searchRadius: 8
+  moleculeLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  inertia: {x: 0, y: 0, z: 0}
+  desiredInertia: {x: 0, y: 0, z: 0}
+  force: {x: 0, y: 0, z: 0}
+  targetMolecule: {fileID: 0}
 --- !u!1 &2842365107860843454
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,7 +147,7 @@ GameObject:
   - component: {fileID: 4277618178236294303}
   - component: {fileID: 7744496501133173509}
   - component: {fileID: 8692751600277851870}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,13 +161,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2842365107860843454}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -1.25}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4293462103818809018}
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.6}
@@ -289,7 +340,7 @@ GameObject:
   - component: {fileID: 6230369232959547239}
   - component: {fileID: 8571022564089041316}
   - component: {fileID: 4416225155979294000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Harvester
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +398,7 @@ MonoBehaviour:
   harvestCooldown: 1
   cooldownMultiplierInside: 1.25
   cooldownBonusAfterLeavingPercentage: 15
-  currentCooldown: 0
+  cooldownBonusAfterLeavingFlatAmount: 0.1
 --- !u!1001 &7051298240154447567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -403,6 +454,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: c654b37893056d14a89b18a37c00f90a, type: 3}
       propertyPath: m_Name
       value: Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c654b37893056d14a89b18a37c00f90a, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

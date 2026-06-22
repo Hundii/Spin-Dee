@@ -32,7 +32,7 @@ namespace Core
             }
         }
 
-        public float GetCurrentLevel()
+        public int GetCurrentLevel()
         {
             return level;
         }

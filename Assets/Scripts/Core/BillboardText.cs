@@ -23,7 +23,7 @@ namespace Core
 
             //transform.Rotate(0, 180, 0);
 
-            transform.rotation = Quaternion.Euler(90,180,0);
+            transform.rotation = Quaternion.Euler(90,0,0);
         }
     }
 }
