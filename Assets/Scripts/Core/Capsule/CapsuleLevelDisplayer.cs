@@ -10,7 +10,7 @@ namespace Core
 
         private void OnEnable()
         {
-            GlobalEvents.IngameLevelledUp.RegisterListener(UpdateLevelDisplay);
+            IngameEvents.LeveledUp.RegisterListener(UpdateLevelDisplay);
         }
 
         private void Start()
@@ -25,7 +25,7 @@ namespace Core
 
         private void OnDisable()
         {
-            GlobalEvents.IngameLevelledUp.UnRegisterListener(UpdateLevelDisplay);
+            IngameEvents.LeveledUp.UnRegisterListener(UpdateLevelDisplay);
         }
     }
 }

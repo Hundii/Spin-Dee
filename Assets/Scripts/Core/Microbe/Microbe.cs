@@ -1,4 +1,6 @@
 using Common;
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -18,12 +20,25 @@ namespace Core
 
         public GameEvent<float> MicrobeDamaged { get; private set; } = new();
 
+        private Harvester[] harvesters;
+
         private void Awake()
         {
             statsHandler = new(new(microbeSO.microbeStats.stats.Select(x => x.stat), microbeSO.microbeStats.stats.Select(x => x.value)));
             HealthSystem = new();
             HealthSystem.Init(statsHandler);
             HealthSystem.EntityDied.RegisterListener(HandleDeath);
+
+            harvesters = GetComponentsInChildren<Harvester>();
+            foreach (var harvester in harvesters)
+            {
+                harvester.MaterialHarvested.RegisterListener(HandleMaterialHarvested);
+            }
+        }
+
+        private void HandleMaterialHarvested(float amount)
+        {
+            IngameEvents.MoleculeMaterialHarvestedByMicrobe.Invoke(amount);
         }
 
         public HarvesterStatsSO GetHarvesterStats()
@@ -44,13 +59,27 @@ namespace Core
 
         public void HandleDeath()
         {
-            IngameEvents.MicrobeDied.Invoke(this);
             var effect = Instantiate(deathEffect,transform.position,Quaternion.identity);
             var main = effect.main;
             main.startColor = effectColor.color;
             effect.Play();
+
+            DropLoot();
+
+            IngameEvents.MicrobeKilledByPlayer.Invoke(this);
+
             Destroy(effect, effect.main.duration);
             Destroy(gameObject);
+        }
+
+        public void DropLoot()
+        {
+            var dropHandlers = microbeSO.lootTable.GetDropHandlers();
+            foreach (var dropHandler in dropHandlers)
+            {
+                var data = dropHandler.GetLootDropData();
+                data.drop.Activate(data.amount);
+            }
         }
     }
 }

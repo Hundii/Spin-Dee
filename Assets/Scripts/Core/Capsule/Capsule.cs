@@ -30,7 +30,7 @@ namespace Core
 
         private void HandleHarvestedMaterial(float amount)
         {
-            GlobalEvents.MoleculeMaterialHarvestedByPlayer.Invoke(amount);
+            IngameEvents.MoleculeMaterialHarvestedByPlayer.Invoke(amount);
         }
 
         public StatsHandler GetStatsHandler()

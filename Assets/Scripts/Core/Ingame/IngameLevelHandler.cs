@@ -12,7 +12,7 @@ namespace Core
 
         private void OnEnable()
         {
-            GlobalEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
         }
 
         private void Awake()
@@ -24,7 +24,7 @@ namespace Core
         {
             float experienceAmount = 1;
             experience += experienceAmount;
-            GlobalEvents.ExperienceEarned.Invoke(experienceAmount);
+            IngameEvents.ExperienceEarned.Invoke(experienceAmount);
 
             if (experience >= GetLevelUpRequirement())
             {
@@ -50,12 +50,12 @@ namespace Core
         public void LevelUp()
         {
             level++;
-            GlobalEvents.IngameLevelledUp.Invoke(level);
+            IngameEvents.LeveledUp.Invoke(level);
         }
 
         private void OnDisable()
         {
-            GlobalEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
         }
     }
 }

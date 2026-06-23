@@ -15,7 +15,7 @@ namespace Core
 
         private void OnEnable()
         {
-            GlobalEvents.ExperienceEarned.RegisterListener(HandleExperienceEarned,true);
+            IngameEvents.ExperienceEarned.RegisterListener(HandleExperienceEarned,true);
         }
 
         private void Start()
@@ -38,7 +38,7 @@ namespace Core
 
         private void OnDisable()
         {
-            GlobalEvents.ExperienceEarned.UnRegisterListener(HandleExperienceEarned);
+            IngameEvents.ExperienceEarned.UnRegisterListener(HandleExperienceEarned);
         }
     }
 }

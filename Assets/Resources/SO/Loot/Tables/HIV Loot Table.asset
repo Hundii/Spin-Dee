@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee61e661f84229428721e65609f40a1, type: 3}
+  m_Name: HIV Loot Table
+  m_EditorClassIdentifier: Common::Common.PercentageLootTableSO
+  icon: {fileID: 0}
+  luckStrategy: 1
+  dropHandlers:
+  - drop: {fileID: 11400000, guid: 245b6e334711b7e41b4d42fe4242054e, type: 2}
+    minAmount: 3
+    maxAmount: 8
+    chance: 100
+    quality: 0
+  - drop: {fileID: 11400000, guid: aee34122a1499a64499fb059b4fe161e, type: 2}
+    minAmount: 1
+    maxAmount: 2
+    chance: 100
+    quality: 0
+  - drop: {fileID: 11400000, guid: 410693fe7f4285d4dac1497a3d1da5de, type: 2}
+    minAmount: 3
+    maxAmount: 8
+    chance: 100
+    quality: 0

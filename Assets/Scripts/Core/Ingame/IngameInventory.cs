@@ -9,7 +9,7 @@ namespace Core
 
         private void OnEnable()
         {
-            GlobalEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
         }
 
         public void HandleMoleculeMaterialHarvestedByPlayer(float amount)
@@ -24,7 +24,7 @@ namespace Core
 
         private void OnDisable()
         {
-            GlobalEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
         }
     }
 }

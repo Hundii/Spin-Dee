@@ -8,5 +8,6 @@ namespace Core
     {
         public GameObject prefab;
         public MicrobeStatsSO microbeStats;
+        public LootTableSO lootTable;
     }
 }
