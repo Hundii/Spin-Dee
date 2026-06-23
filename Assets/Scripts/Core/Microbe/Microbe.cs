@@ -6,7 +6,12 @@ namespace Core
 {
     public class Microbe : MonoBehaviour, IHarvesterStatsHolder, IStatsHandlerHolder, IDamageable
     {
+        [Header("References")]
         [SerializeField] private MicrobeSO microbeSO;
+        [Header("Effect")]
+        [SerializeField] private ParticleSystem deathEffect;
+        [SerializeField] private Material effectColor;
+
         private StatsHandler statsHandler;
 
         public HealthSystem HealthSystem { get; private set; }
@@ -40,6 +45,11 @@ namespace Core
         public void HandleDeath()
         {
             IngameEvents.MicrobeDied.Invoke(this);
+            var effect = Instantiate(deathEffect,transform.position,Quaternion.identity);
+            var main = effect.main;
+            main.startColor = effectColor.color;
+            effect.Play();
+            Destroy(effect, effect.main.duration);
             Destroy(gameObject);
         }
     }

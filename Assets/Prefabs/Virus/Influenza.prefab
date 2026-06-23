@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Microbe
   microbeSO: {fileID: 11400000, guid: f4def9502d21e104387729dc2c0ff67a, type: 2}
+  deathEffect: {fileID: 8539074670459004482, guid: f4709d214c4967a4fbaebb62db4b79bd, type: 3}
+  effectColor: {fileID: 2100000, guid: b008444aecb10dc4d93842544662f2f7, type: 2}
 --- !u!114 &236902280292720525
 MonoBehaviour:
   m_ObjectHideFlags: 0
