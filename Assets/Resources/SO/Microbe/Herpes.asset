@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Herpes
   m_EditorClassIdentifier: Core::Core.MicrobeSO
   prefab: {fileID: 259407305997185464, guid: e24f233f40339d8468654463ac1684d4, type: 3}
+  microbeStats: {fileID: 11400000, guid: f6a9c92b30cfd6542893c531afeb55a1, type: 2}

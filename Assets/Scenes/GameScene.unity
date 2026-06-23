@@ -482,13 +482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571e80eb7b732584d95cd3a109ec49b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.BacteriaSpawner
+  spawnTriesPerSecond: 5
   spawnArea: {fileID: 7756532013939479244}
   spawnedObjectsParent: {fileID: 1677657007}
-  bacteriaPrefabs:
-  - {fileID: 259407305997185464, guid: b137012a38aa3174ab922b965eb7bb2b, type: 3}
-  - {fileID: 259407305997185464, guid: b0cf794b2bf572848b939979c1842b67, type: 3}
-  - {fileID: 259407305997185464, guid: 075178ec471d16547bd78459b3d76b25, type: 3}
-  - {fileID: 259407305997185464, guid: e24f233f40339d8468654463ac1684d4, type: 3}
 --- !u!4 &168922341
 Transform:
   m_ObjectHideFlags: 0
@@ -521,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd9e6b66e943f5d46a549f5117ed76a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.MoleculeSpawner
+  spawnTriesPerSecond: 5
   spawnArea: {fileID: 164472160}
   spawnedObjectsParent: {fileID: 1677657007}
   moleculePrefab: {fileID: 4657164022789196472, guid: 2ae5c46b1f646c14cb83cd20848473c3, type: 3}
@@ -1885,14 +1882,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1565269326170059204, guid: 26056b37162ba6043a7777a9bb6e5135, type: 3}
-      propertyPath: moveSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565269326170059204, guid: 26056b37162ba6043a7777a9bb6e5135, type: 3}
-      propertyPath: groundLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 1818063575116265846, guid: 26056b37162ba6043a7777a9bb6e5135, type: 3}
       propertyPath: m_Name
       value: Capsule
@@ -1937,16 +1926,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4546576286507412510, guid: 26056b37162ba6043a7777a9bb6e5135, type: 3}
-      propertyPath: m_Mass
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6502673881949678761, guid: 26056b37162ba6043a7777a9bb6e5135, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2924493243666761770, guid: 26056b37162ba6043a7777a9bb6e5135, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

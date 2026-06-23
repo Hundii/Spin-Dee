@@ -1,4 +1,5 @@
 using Common;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,10 +16,14 @@ namespace Core
 
         private Jar jar;
 
+        private float spawnChancePerSecond;
+
         private void Awake()
         {
             jar = GetComponent<Jar>();
+            var liquidSO = jar.GetLiquidSO();
             liquidSpawnData = jar.GetLiquidSO().spawnData;
+            spawnChancePerSecond = liquidSO.microbeSpawnChancePerSecond;
         }
 
         void Start()
@@ -29,6 +34,7 @@ namespace Core
             SpawnBacteria();
             SpawnBacteria();
             SpawnBacteria();
+            StartCoroutine(TickSpawn());
         }
 
         public void SpawnBacteria()
@@ -40,6 +46,17 @@ namespace Core
             bacteria.transform.SetParent(spawnedObjectsParent);
         }
 
-        
+        IEnumerator TickSpawn()
+        {
+            var wait = new WaitForSeconds(1 / spawnTriesPerSecond);
+            while (true)
+            {
+                if (Random.Range(0f, 1f) <= (spawnChancePerSecond / (100 * spawnTriesPerSecond)))
+                {
+                    SpawnBacteria();
+                }
+                yield return wait;
+            }
+        }
     }
 }

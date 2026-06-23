@@ -4,6 +4,8 @@ namespace Core
 {
     public abstract class GenericSpawner : MonoBehaviour
     {
+        [SerializeField] protected float spawnTriesPerSecond = 5f;
+
         [Header("References")]
         [SerializeField] protected Collider spawnArea;
 

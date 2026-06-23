@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Covid
   m_EditorClassIdentifier: Core::Core.MicrobeSO
   prefab: {fileID: 259407305997185464, guid: 075178ec471d16547bd78459b3d76b25, type: 3}
+  microbeStats: {fileID: 11400000, guid: cde090a14ba82f94281144589515baf0, type: 2}

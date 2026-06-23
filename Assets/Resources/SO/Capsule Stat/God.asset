@@ -24,5 +24,5 @@ MonoBehaviour:
   - stat: {fileID: 11400000, guid: 6bd8806880267f44f841dafb883714b6, type: 2}
     value: 2
   - stat: {fileID: 11400000, guid: b057b35bfecbae545b452a7d2fdb97d9, type: 2}
-    value: 5
+    value: 2
   harvesterStatsSO: {fileID: 11400000, guid: 3f8e7fdd6dbb8584d9a04f44e0918366, type: 2}

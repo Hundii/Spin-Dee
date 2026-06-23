@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Generic
   m_EditorClassIdentifier: Core::Core.MicrobeSO
   prefab: {fileID: 259407305997185464, guid: 447a280265904b948ad464dae91218c5, type: 3}
+  microbeStats: {fileID: 11400000, guid: 0ff55cd1661b0f5448fe4dd7b339a37f, type: 2}

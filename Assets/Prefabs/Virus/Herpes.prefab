@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4507634534078832316}
   - component: {fileID: 3086306536498542075}
   - component: {fileID: 7187748558137006151}
+  - component: {fileID: -2145409581694320855}
   m_Layer: 9
   m_Name: Herpes
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9504e917867e08b45b7e56da40a49922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Microbe
-  microbeStats: {fileID: 11400000, guid: f6a9c92b30cfd6542893c531afeb55a1, type: 2}
+  microbeSO: {fileID: 11400000, guid: f3afdd07369a1774ca69ec360790732c, type: 2}
 --- !u!114 &7187748558137006151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd31889315ed164587a1f3ddb9d22a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.MicrobeReproduction
+--- !u!114 &-2145409581694320855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259407305997185464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5882230e15b87446b0c81eaaff1f086, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Core.MicrobeHealthDisplayer
+  healthText: {fileID: 7744496501133173509}
 --- !u!1 &2842365107860843454
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,8 +317,8 @@ MonoBehaviour:
   m_fontSizeMin: 2
   m_fontSizeMax: 24
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

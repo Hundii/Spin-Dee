@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Influenza
   m_EditorClassIdentifier: Core::Core.MicrobeSO
   prefab: {fileID: 259407305997185464, guid: b137012a38aa3174ab922b965eb7bb2b, type: 3}
+  microbeStats: {fileID: 11400000, guid: 731388e1b555ac741b948b594e0c21f7, type: 2}

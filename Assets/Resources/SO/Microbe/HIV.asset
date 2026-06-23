@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: HIV
   m_EditorClassIdentifier: Core::Core.MicrobeSO
   prefab: {fileID: 259407305997185464, guid: b0cf794b2bf572848b939979c1842b67, type: 3}
+  microbeStats: {fileID: 11400000, guid: 6aa25e0f99ec88f47bbe83982878c545, type: 2}

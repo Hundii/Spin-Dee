@@ -9,7 +9,7 @@ namespace Core
     {
         public Material liquidMaterial;
         public List<LiquidSpawnData> spawnData;
-        public float microbeSpawnRate;
-        public float moleculeSpawnRate;
+        public float microbeSpawnChancePerSecond;
+        public float moleculeSpawnChancePerSecond;
     }
 }

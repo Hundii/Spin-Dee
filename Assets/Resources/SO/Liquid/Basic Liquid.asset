@@ -18,5 +18,5 @@ MonoBehaviour:
     weight: 3
   - microbe: {fileID: 11400000, guid: f4def9502d21e104387729dc2c0ff67a, type: 2}
     weight: 1
-  microbeSpawnRate: 1
-  moleculeSpawnRate: 1
+  microbeSpawnChancePerSecond: 8
+  moleculeSpawnChancePerSecond: 5

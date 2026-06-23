@@ -48,7 +48,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818063575116265846}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Core::Core.CapsuleMover
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!114 &5635393728604874937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055b3728c38ba63429853436e91ab768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.CapsuleSpinner
-  rotationSpeed: 120
 --- !u!114 &4369677350608465325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +324,7 @@ GameObject:
   - component: {fileID: 7962865139823843886}
   - component: {fileID: 7042462939778502211}
   - component: {fileID: 5586021205747380420}
+  - component: {fileID: 2653504788252405297}
   m_Layer: 0
   m_Name: LeftTrigger
   m_TagString: Untagged
@@ -380,6 +380,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3048e36d22af14fa7060b9746fee15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Harvester
+--- !u!114 &2653504788252405297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4629286429457477353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb06dcc11cd2804383c9d17a5b87178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Core.CapsuleWeapon
 --- !u!1 &8290640887181387266
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +403,7 @@ GameObject:
   - component: {fileID: 8171619493077560154}
   - component: {fileID: 4984209117267111897}
   - component: {fileID: 3076043313979650671}
+  - component: {fileID: 1208632296247226316}
   m_Layer: 0
   m_Name: RightTrigger
   m_TagString: Untagged
@@ -446,6 +459,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3048e36d22af14fa7060b9746fee15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Harvester
+--- !u!114 &1208632296247226316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8290640887181387266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb06dcc11cd2804383c9d17a5b87178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Core.CapsuleWeapon
 --- !u!1 &8841795657853727335
 GameObject:
   m_ObjectHideFlags: 0

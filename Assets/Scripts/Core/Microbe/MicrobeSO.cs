@@ -7,5 +7,6 @@ namespace Core
     public class MicrobeSO : ContainedSO
     {
         public GameObject prefab;
+        public MicrobeStatsSO microbeStats;
     }
 }
