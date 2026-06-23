@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d5c2b0436fd1cc4387cf9a5415f6864, type: 3}
+  m_Name: CapsuleStatsSOContainer
+  m_EditorClassIdentifier: Core::Core.Generated.CapsuleStatsSOContainer
+  capsuleStatsSOArray:
+  - {fileID: 11400000, guid: 92c5714f34a970f46acf541122bd47bb, type: 2}
+  - {fileID: 11400000, guid: 615b1518fad89e544b19b7cb8db20382, type: 2}
+  - {fileID: 11400000, guid: b8fd4457ca3a08248ab10901ddbc2b4a, type: 2}
+  - {fileID: 11400000, guid: 9866a7ddfe1c63f47a0df2a224982765, type: 2}
+  basic: {fileID: 11400000, guid: 92c5714f34a970f46acf541122bd47bb, type: 2}
+  fast: {fileID: 11400000, guid: 615b1518fad89e544b19b7cb8db20382, type: 2}
+  god: {fileID: 11400000, guid: b8fd4457ca3a08248ab10901ddbc2b4a, type: 2}
+  golden: {fileID: 11400000, guid: 9866a7ddfe1c63f47a0df2a224982765, type: 2}

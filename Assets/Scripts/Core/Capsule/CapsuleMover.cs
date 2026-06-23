@@ -1,15 +1,20 @@
 using Common;
+using Core.Generated;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Core
 {
+    [RequireComponent(typeof(Capsule))] 
     [RequireComponent(typeof(Rigidbody))]
     public class CapsuleMover : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed;
         [SerializeField] private LayerMask groundLayer;
 
+        private float moveSpeed;
+
+        private StatSOContainer statSOContainer;
+        private StatsHandler statsHandler;
         private Rigidbody rb;
 
         private InputSystem_Actions inputActions;
@@ -19,6 +24,15 @@ namespace Core
         {
             inputActions = new();
             rb = GetComponent<Rigidbody>();
+            
+        }
+
+        private void Start()
+        {
+            statsHandler = GetComponent<Capsule>().StatsHandler;
+            statsHandler.valueChanged += HandleStatChange;
+            statSOContainer = SOContainerContainer.StatSOContainer;
+            HandleStatChange();
         }
 
         private void OnEnable()
@@ -41,6 +55,12 @@ namespace Core
                 rb.position +
                 moveSpeed * Time.fixedDeltaTime * movement
             );
+        }
+
+        private void HandleStatChange()
+        {
+            statsHandler.TryGetAttributeValue(statSOContainer.moveSpeed, out var moveSpeed);
+            this.moveSpeed = (float)moveSpeed;
         }
 
         public void HandleMove(InputAction.CallbackContext context)

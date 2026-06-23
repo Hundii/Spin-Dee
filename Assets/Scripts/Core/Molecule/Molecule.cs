@@ -22,21 +22,28 @@ namespace Core
             return amount;
         }
 
-        public bool Harvest(out float value)
+        public bool Harvest(float requestedValue,out float actualValue)
         {
             if (IsDead)
             {
-                value = -1;
+                actualValue = -1;
                 return false;
             }
-            amount -= 1;
+            if (amount < requestedValue)
+            {
+                actualValue = amount;
+            }
+            else
+            {
+                actualValue = requestedValue;
+            }
+            amount -= requestedValue;
             if (amount <= 0f)
             {
                 IsDead = true;
                 Destroy(gameObject);
             }
-            value = 1;
-            MoleculeHarvested.Invoke(value);
+            MoleculeHarvested.Invoke(actualValue);
             return true;
         }
     }

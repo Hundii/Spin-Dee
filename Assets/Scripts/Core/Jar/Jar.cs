@@ -4,16 +4,11 @@ namespace Core
 {
     public class Jar : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
+        [SerializeField] private LiquidSO liquidSO;
 
-        // Update is called once per frame
-        void Update()
+        public LiquidSO GetLiquidSO()
         {
-        
+            return liquidSO;
         }
     }
 }

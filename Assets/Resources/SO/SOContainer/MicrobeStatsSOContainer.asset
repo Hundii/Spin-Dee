@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455005fd1732aaf4b9d9841bcce87699, type: 3}
+  m_Name: MicrobeStatsSOContainer
+  m_EditorClassIdentifier: Core::Core.Generated.MicrobeStatsSOContainer
+  microbeStatsSOArray:
+  - {fileID: 11400000, guid: 0ff55cd1661b0f5448fe4dd7b339a37f, type: 2}
+  - {fileID: 11400000, guid: cde090a14ba82f94281144589515baf0, type: 2}
+  - {fileID: 11400000, guid: f6a9c92b30cfd6542893c531afeb55a1, type: 2}
+  - {fileID: 11400000, guid: 6aa25e0f99ec88f47bbe83982878c545, type: 2}
+  - {fileID: 11400000, guid: 731388e1b555ac741b948b594e0c21f7, type: 2}
+  basic: {fileID: 11400000, guid: 0ff55cd1661b0f5448fe4dd7b339a37f, type: 2}
+  covid: {fileID: 11400000, guid: cde090a14ba82f94281144589515baf0, type: 2}
+  herpes: {fileID: 11400000, guid: f6a9c92b30cfd6542893c531afeb55a1, type: 2}
+  hIV: {fileID: 11400000, guid: 6aa25e0f99ec88f47bbe83982878c545, type: 2}
+  influenza: {fileID: 11400000, guid: 731388e1b555ac741b948b594e0c21f7, type: 2}

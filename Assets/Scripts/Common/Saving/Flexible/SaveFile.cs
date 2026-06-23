@@ -37,6 +37,7 @@ namespace Common.Saving.Flexible
         public void LoadContent()
         {
             FileSaveManager.LoadFile(fileName, ref saveContent);
+            saveContent ??= new();
         }
 
         public void Save<T>(string key, T value)

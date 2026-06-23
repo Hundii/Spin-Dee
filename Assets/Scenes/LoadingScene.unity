@@ -164,6 +164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 866079129}
+  - {fileID: 1723880710}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &163338815
@@ -227,6 +228,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Core::SOContainerContainer
   ingameLevelRequirementSOContainer: {fileID: 11400000, guid: 393f985bf9a966d4792fd1c749cd835d, type: 2}
+  currencySOContainer: {fileID: 11400000, guid: 52f8b0ce0098a6e48985365aefeb28b7, type: 2}
+  statSOContainer: {fileID: 11400000, guid: e28b8de0ac13ab54dbccccc93b5e25c4, type: 2}
+  itemDefinitionSOContainer: {fileID: 11400000, guid: a7dc2aad831009d40a2f8a855114666f, type: 2}
+  capsuleStatsSOContainer: {fileID: 11400000, guid: 36f5f0f7da75c534a8a8d3e7408b8bf6, type: 2}
+  microbeStatsSOContainer: {fileID: 11400000, guid: 3ecff8170d3c8da48aee17b4fa65ea43, type: 2}
+  harvesterStatsSOContainer: {fileID: 11400000, guid: df439292d4102d047a3cffff4f56897f, type: 2}
+  microbeSOContainer: {fileID: 11400000, guid: 39ae486e5ea96aa4cb9997da236e570e, type: 2}
+  liquidSOContainer: {fileID: 11400000, guid: ad9eb4f41b05f45489823c47188fd044, type: 2}
 --- !u!1 &1715294128
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +363,50 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &1723880709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723880710}
+  - component: {fileID: 1723880711}
+  m_Layer: 0
+  m_Name: PlayerInventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1723880710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723880709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 163338814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723880711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723880709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734ab151ad32e0d4eba466aff78067f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Core::Core.PlayerInventory
 --- !u!1 &2046400592
 GameObject:
   m_ObjectHideFlags: 0

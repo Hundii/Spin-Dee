@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace Common.Saving
@@ -84,6 +85,7 @@ namespace Common.Saving
             catch (Exception e)
             {
                 CustomLogger.LogError(e.Message, LogGroupFlags.SaveAndLoad);
+                loadableObject = default;
             }
         }
 

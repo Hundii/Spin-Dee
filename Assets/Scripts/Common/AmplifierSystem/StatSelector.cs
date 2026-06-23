@@ -1,8 +1,9 @@
 namespace Common
 {
-    public class StatSelector<T> where T : Stat
+    [System.Serializable]
+    public class StatSelector
     {
-        public T stat;
-        public float value;
+        public Stat stat;
+        public double value;
     }
 }
