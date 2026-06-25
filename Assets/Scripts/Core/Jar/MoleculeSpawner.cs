@@ -8,7 +8,7 @@ namespace Core
     public class MoleculeSpawner : GenericSpawner
     {
         [SerializeField] private Transform spawnedObjectsParent;
-        [SerializeField] private Molecule moleculePrefab;
+        [SerializeField] private MoleculeSO moleculeSO;
 
         private Jar jar;
 
@@ -31,9 +31,9 @@ namespace Core
         public void SpawnMolecule()
         {
             var randomPoint = GetRandomPointInSpawnArea();
-            var molecule = Instantiate(moleculePrefab, randomPoint, Quaternion.identity);
+            var molecule = Instantiate(moleculeSO.prefab, randomPoint, Quaternion.identity);
             molecule.transform.SetParent(spawnedObjectsParent);
-            molecule.Init();
+            molecule.Init(moleculeSO);
         }
 
         IEnumerator TickSpawn()

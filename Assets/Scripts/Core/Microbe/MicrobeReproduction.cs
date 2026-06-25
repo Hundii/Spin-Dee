@@ -1,9 +1,11 @@
+using Common;
 using UnityEngine;
 
 namespace Core
 {
     public class MicrobeReproduction : MonoBehaviour
     {
+        private MicrobeSpawner microbeSpawner;
         private Harvester harvester;
 
         float currentMaterials = 0f;
@@ -12,6 +14,8 @@ namespace Core
         {
             harvester = GetComponentInChildren<Harvester>();
             harvester.MaterialHarvested.RegisterListener(HandleMaterialHarvested);
+
+            microbeSpawner = this.Inject<MicrobeSpawner>();
         }
 
         private void HandleMaterialHarvested(float amount)
@@ -26,6 +30,7 @@ namespace Core
 
         public void Reproduce()
         {
+            microbeSpawner.SpawnMicrobe(transform.position,gameObject);
             Debug.Log($"Reproduced {name}");
         }
     }

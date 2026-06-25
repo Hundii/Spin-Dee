@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3fab747af5749e4a9c5f0eb9cc2d4f5, type: 3}
+  m_Name: BoosterSOContainer
+  m_EditorClassIdentifier: Core::Core.Generated.BoosterSOContainer
+  boosterSOArray:
+  - {fileID: 11400000, guid: f25d4913a71704b40b35f51d9511964e, type: 2}
+  - {fileID: 11400000, guid: 6dcdbd6a6e65924439692db0e7f33e6d, type: 2}
+  - {fileID: 11400000, guid: 51f58ed17c18bde4895c3f0f60cf389a, type: 2}
+  - {fileID: 11400000, guid: c183552a2c4eae543bddb916ea0783aa, type: 2}
+  - {fileID: 11400000, guid: 2d2527932bc009043aa1cac4372b6ef9, type: 2}
+  - {fileID: 11400000, guid: e2c9cbc5c00f2564aa536c3e33ae91fc, type: 2}
+  - {fileID: 11400000, guid: 569acf979d7507240904ffdd5dc45dd1, type: 2}
+  - {fileID: 11400000, guid: ac2f1da7dd5392f498b7ce44cbac41ce, type: 2}
+  - {fileID: 11400000, guid: 45e72514f238abe4f96c78bb19fb27a7, type: 2}
+  - {fileID: 11400000, guid: dc7a1cfb928baa94fa29950b8b3fb208, type: 2}
+  - {fileID: 11400000, guid: 6721035376aeea742832c3ed1d01e13f, type: 2}
+  - {fileID: 11400000, guid: 944bef76307e3a1438b817c3f1fd9fe4, type: 2}
+  - {fileID: 11400000, guid: 767511e0175faa542a3de5f59c2ae861, type: 2}
+  - {fileID: 11400000, guid: 8f6f4fc5c991fe543b357acb86a53b7c, type: 2}
+  - {fileID: 11400000, guid: 12ea43a997d90e346a3d98fdd5576f6b, type: 2}
+  - {fileID: 11400000, guid: 0bf567e11c7b5fe4ba7c3a793907ee67, type: 2}
+  - {fileID: 11400000, guid: eeb43761edb86544f9f0a8ced0de109f, type: 2}
+  - {fileID: 11400000, guid: 3cd3acba9ef41114d9edcff618e08bda, type: 2}
+  - {fileID: 11400000, guid: c3e48d982862a2a4a925e4a6724a01b5, type: 2}
+  - {fileID: 11400000, guid: ddb5ac280329ec34ab849434ce094741, type: 2}
+  - {fileID: 11400000, guid: 8412d4ab35ce4b842a11996e160478ab, type: 2}
+  - {fileID: 11400000, guid: b7c04fd8769798a40a0579a3a8392795, type: 2}
+  - {fileID: 11400000, guid: f8aaea33ad0889148bc5e4a007e3ca04, type: 2}
+  - {fileID: 11400000, guid: 4553b499e02995c49b6bac0567d58ee9, type: 2}
+  - {fileID: 11400000, guid: eeb93df8b8557564389bc1d6c704aa3b, type: 2}
+  baseBooster: {fileID: 11400000, guid: f25d4913a71704b40b35f51d9511964e, type: 2}
+  capsuleDamageTier1: {fileID: 11400000, guid: 6dcdbd6a6e65924439692db0e7f33e6d, type: 2}
+  capsuleDamageTier2: {fileID: 11400000, guid: 51f58ed17c18bde4895c3f0f60cf389a, type: 2}
+  capsuleDamageTier3: {fileID: 11400000, guid: c183552a2c4eae543bddb916ea0783aa, type: 2}
+  capsuleDamageTier4: {fileID: 11400000, guid: 2d2527932bc009043aa1cac4372b6ef9, type: 2}
+  capsuleMoveSpeedTier1: {fileID: 11400000, guid: e2c9cbc5c00f2564aa536c3e33ae91fc, type: 2}
+  capsuleMoveSpeedTier2: {fileID: 11400000, guid: 569acf979d7507240904ffdd5dc45dd1, type: 2}
+  capsuleMoveSpeedTier3: {fileID: 11400000, guid: ac2f1da7dd5392f498b7ce44cbac41ce, type: 2}
+  capsuleMoveSpeedTier4: {fileID: 11400000, guid: 45e72514f238abe4f96c78bb19fb27a7, type: 2}
+  capsuleSpinSpeedTier1: {fileID: 11400000, guid: dc7a1cfb928baa94fa29950b8b3fb208, type: 2}
+  capsuleSpinSpeedTier2: {fileID: 11400000, guid: 6721035376aeea742832c3ed1d01e13f, type: 2}
+  capsuleSpinSpeedTier3: {fileID: 11400000, guid: 944bef76307e3a1438b817c3f1fd9fe4, type: 2}
+  capsuleSpinSpeedTier4: {fileID: 11400000, guid: 767511e0175faa542a3de5f59c2ae861, type: 2}
+  moleculeHarvestAmountTier1: {fileID: 11400000, guid: 8f6f4fc5c991fe543b357acb86a53b7c, type: 2}
+  moleculeHarvestAmountTier2: {fileID: 11400000, guid: 12ea43a997d90e346a3d98fdd5576f6b, type: 2}
+  moleculeHarvestAmountTier3: {fileID: 11400000, guid: 0bf567e11c7b5fe4ba7c3a793907ee67, type: 2}
+  moleculeHarvestAmountTier4: {fileID: 11400000, guid: eeb43761edb86544f9f0a8ced0de109f, type: 2}
+  moleculeHarvestSpeedTier1: {fileID: 11400000, guid: 3cd3acba9ef41114d9edcff618e08bda, type: 2}
+  moleculeHarvestSpeedTier2: {fileID: 11400000, guid: c3e48d982862a2a4a925e4a6724a01b5, type: 2}
+  moleculeHarvestSpeedTier3: {fileID: 11400000, guid: ddb5ac280329ec34ab849434ce094741, type: 2}
+  moleculeHarvestSpeedTier4: {fileID: 11400000, guid: 8412d4ab35ce4b842a11996e160478ab, type: 2}
+  scoreTier1: {fileID: 11400000, guid: b7c04fd8769798a40a0579a3a8392795, type: 2}
+  scoreTier2: {fileID: 11400000, guid: f8aaea33ad0889148bc5e4a007e3ca04, type: 2}
+  scoreTier3: {fileID: 11400000, guid: 4553b499e02995c49b6bac0567d58ee9, type: 2}
+  scoreTier4: {fileID: 11400000, guid: eeb93df8b8557564389bc1d6c704aa3b, type: 2}

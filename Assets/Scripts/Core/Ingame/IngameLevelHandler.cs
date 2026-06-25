@@ -1,4 +1,5 @@
 using Common;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core
@@ -7,8 +8,12 @@ namespace Core
     {
         private IngameLevelRequirementSO levelRequirementSO;
 
+        private BoosterSlotMachine boosterSlotMachine;
+
         private float experience;
         private int level;
+
+        private float previousTimeScale;
 
         private void OnEnable()
         {
@@ -18,6 +23,11 @@ namespace Core
         private void Awake()
         {
             levelRequirementSO = SOContainerContainer.IngameLevelRequirementSOContainer.defaultLevelRequirement;
+        }
+
+        private void Start()
+        {
+            boosterSlotMachine = this.Inject<BoosterSlotMachine>();
         }
 
         public void HandleMoleculeMaterialHarvestedByPlayer(float amount)
@@ -51,6 +61,21 @@ namespace Core
         {
             level++;
             IngameEvents.LeveledUp.Invoke(level);
+            previousTimeScale = Time.timeScale;
+            // Scroll snap uses DestroyImmediately internally, so we need to call it in a safe environment
+            Invoke(nameof(OpenBoosterSlotMachine),0);
+        }
+
+        private void OpenBoosterSlotMachine()
+        {
+            boosterSlotMachine.Open();
+            boosterSlotMachine.SelectionFinished.RegisterOneTimeListener(HandleBoosterSelectionFinished);
+            Time.timeScale = 0f;
+        }
+
+        public void HandleBoosterSelectionFinished()
+        {
+            Time.timeScale = previousTimeScale;
         }
 
         private void OnDisable()

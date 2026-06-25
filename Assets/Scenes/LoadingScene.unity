@@ -236,6 +236,7 @@ MonoBehaviour:
   harvesterStatsSOContainer: {fileID: 11400000, guid: df439292d4102d047a3cffff4f56897f, type: 2}
   microbeSOContainer: {fileID: 11400000, guid: 39ae486e5ea96aa4cb9997da236e570e, type: 2}
   liquidSOContainer: {fileID: 11400000, guid: ad9eb4f41b05f45489823c47188fd044, type: 2}
+  boosterSOContainer: {fileID: 11400000, guid: 0928d3fb69c016044b9e613935238c15, type: 2}
 --- !u!1 &1715294128
 GameObject:
   m_ObjectHideFlags: 0

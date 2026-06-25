@@ -1,4 +1,5 @@
 using Common;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core
@@ -19,11 +20,14 @@ namespace Core
             }
         }
 
+        private List<ScoreBoosterSO> scoreBoosters = new();
+
         private void OnEnable()
         {
             IngameEvents.MicrobeKilledByPlayer += HandleMicrobeKilled;
             IngameEvents.MoleculeMaterialHarvestedByMicrobe += HandleMaterialHarvestedByMicrobe;
             IngameEvents.MoleculeMaterialHarvestedByPlayer += HandleMaterialHarvestedByPlayer;
+            IngameEvents.ScoreBoosterGained.RegisterListener(HandleScoreBoosterActivated);
         }
 
         private void HandleMicrobeKilled(Microbe microbe)
@@ -43,7 +47,16 @@ namespace Core
 
         public float GetScoreRequirement()
         {
-            return 25f;
+            return 100f;
+        }
+
+        public void HandleScoreBoosterActivated(ScoreBoosterSO scoreBoosterSO)
+        {
+            scoreBoosters.Add(scoreBoosterSO);
+            Debug.Log(CurrentScore);
+            CurrentScore += scoreBoosterSO.scoreAmount;
+            Debug.Log(scoreBoosterSO.scoreAmount);
+            Debug.Log(CurrentScore);
         }
 
         private void OnDisable()
@@ -51,6 +64,7 @@ namespace Core
             IngameEvents.MicrobeKilledByPlayer -= HandleMicrobeKilled;
             IngameEvents.MoleculeMaterialHarvestedByMicrobe -= HandleMaterialHarvestedByMicrobe;
             IngameEvents.MoleculeMaterialHarvestedByPlayer -= HandleMaterialHarvestedByPlayer;
+            IngameEvents.ScoreBoosterGained -= HandleScoreBoosterActivated;
         }
     }
 }

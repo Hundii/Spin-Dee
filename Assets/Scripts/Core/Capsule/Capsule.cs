@@ -11,6 +11,12 @@ namespace Core
         private List<Harvester> harvesters = new();
         public StatsHandler StatsHandler { get; private set; }
 
+        private List<StatBoosterSO> boosters = new();
+        private void OnEnable()
+        {
+            IngameEvents.CapsuleBoosterGained += RegisterBooster;
+        }
+
         private void Awake()
         {
             capsuleStatsSO = SOContainerContainer.CapsuleStatsSOContainer.god;
@@ -41,6 +47,18 @@ namespace Core
         public HarvesterStatsSO GetHarvesterStats()
         {
             return capsuleStatsSO.harvesterStatsSO;
+        }
+
+        public void RegisterBooster(StatBoosterSO booster)
+        {
+            boosters.Add(booster);
+            StatsHandler.RegisterAmplifiers(booster.amplifier);
+            StatsHandler.TryGetAttributeValue(booster.amplifier.stat, out var value);
+        }
+
+        private void OnDisable()
+        {
+            IngameEvents.CapsuleBoosterGained -= RegisterBooster;
         }
     }
 }

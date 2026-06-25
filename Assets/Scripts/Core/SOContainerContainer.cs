@@ -34,12 +34,15 @@ public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
     [SerializeField] private LiquidSOContainer liquidSOContainer;
     public static LiquidSOContainer LiquidSOContainer { get; set; }
 
+    [SerializeField] private BoosterSOContainer boosterSOContainer;
+    public static BoosterSOContainer BoosterSOContainer { get; set; }
+
     void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
     {
         _onReady = onReady;
     }
 
-    void Start()
+    private void Awake()
     {
         IngameLevelRequirementSOContainer = ingameLevelRequirementSOContainer;
         CurrencySOContainer = currencySOContainer;
@@ -50,6 +53,7 @@ public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
         HarvesterStatsSOContainer = harvesterStatsSOContainer;
         LiquidSOContainer = liquidSOContainer;
         MicrobeSOContainer = microbeSOContainer;
+        BoosterSOContainer = boosterSOContainer;
         _onReady.Invoke(this);
     }
 

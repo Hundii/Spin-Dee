@@ -1,3 +1,5 @@
+using Common;
+using Core.Generated;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,17 +8,22 @@ namespace Core
 {
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Microbe))]
     public class MicrobeMovement : MonoBehaviour
     {
-        [SerializeField] private float moveSpeed = 1.5f;
         [SerializeField] private LayerMask groundLayer;
         [Header("Idle")]
         [SerializeField] private float wanderRadius = 0.2f;
         [SerializeField] private float wanderPositionUpdateFrequencyPerSecond = 0.75f;
         [Header("Molecule Searching")]
         [SerializeField] private float searchFrequencyPerSecond = 10;
-        [SerializeField] private float searchRadius = 8f;
         [SerializeField] private LayerMask moleculeLayer;
+
+        private StatSOContainer statSOContainer;
+        private StatsHandler statsHandler;
+
+        private float moveSpeed;
+        private float searchRadius;
 
         public Vector3 inertia;
         public Vector3 desiredInertia;
@@ -30,17 +37,21 @@ namespace Core
         private bool isWandering = false;
         private Vector3 wanderDestination;
 
-        private void Awake()
+        private void Start()
         {
+            
+
+            statSOContainer = SOContainerContainer.StatSOContainer;
+            statsHandler = GetComponent<Microbe>().GetStatsHandler();
+            statsHandler.valueChanged += HandleStatChange;
+            HandleStatChange();
+
             agent = GetComponent<NavMeshAgent>();
             agent.updatePosition = false;
             agent.updateRotation = false;
             agent.speed = moveSpeed;
             rb = GetComponent<Rigidbody>();
-        }
 
-        private void Start()
-        {
             StartCoroutine(FindClosestMoleculeDeposit());
             StartCoroutine(TickRandomWanderPosition());
         }
@@ -140,6 +151,15 @@ namespace Core
                 wanderDestination = GetRandomWanderPoint();
                 yield return wait;
             }
+        }
+
+        private void HandleStatChange()
+        {
+            statsHandler.TryGetAttributeValue(statSOContainer.moveSpeed,out var moveSpeed);
+            this.moveSpeed = (float)moveSpeed;
+
+            statsHandler.TryGetAttributeValue(statSOContainer.moleculeDetectionRange, out var detectionRange);
+            searchRadius = (float)detectionRange;
         }
 
         private void OnCollisionEnter(Collision collision)

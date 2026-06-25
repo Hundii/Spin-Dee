@@ -1,17 +1,22 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 namespace Common
 {
     public class AmplifierSystem
     {
-        protected struct AmplifierValues
+        protected class AmplifierValues
         {
             public double baseValue;
             public double additiveValue;
             public double additiveMultiplier;
             public double trueMuliplier;
+
+            public AmplifierValues()
+            {
+                
+            }
 
             public AmplifierValues(double baseValue)
             {
@@ -43,8 +48,9 @@ namespace Common
                     default:
                         break;
                 }
+                CustomLogger.Log(additiveMultiplier);
             }
-            public readonly double GetBuffedValue()
+            public double GetBuffedValue()
             {
                 return (baseValue + additiveValue) * additiveMultiplier * trueMuliplier;
             }
@@ -55,7 +61,7 @@ namespace Common
                 {
                     baseValue = baseValue + other.baseValue,
                     additiveValue = additiveValue + other.additiveValue,
-                    additiveMultiplier = additiveMultiplier + (other.additiveMultiplier - 1) / 100,
+                    additiveMultiplier = additiveMultiplier + (other.additiveMultiplier - 1),
                     trueMuliplier = trueMuliplier * other.trueMuliplier
                 };
 
@@ -181,7 +187,7 @@ namespace Common
             foreach (var amplifier in amplifiersInContext)
             {
                 int stacking = amplifierStacking[amplifier];
-                for (int i = 0; i < stacking + 1; i++)
+                for (int i = 0; i < stacking; i++)
                 {
                     statDatas[stat].RegisterAmplifier(amplifier);
                 }

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Core
 {
     [RequireComponent(typeof(Jar))]
-    public class MicrobeSpawner : GenericSpawner
+    public class MicrobeSpawner : GenericSpawner, INonPersistentManager
     {
         [Header("References")]
         [SerializeField] private Transform spawnedObjectsParent;
@@ -28,22 +28,28 @@ namespace Core
 
         void Start()
         {
-            SpawnBacteria();
-            SpawnBacteria();
-            SpawnBacteria();
-            SpawnBacteria();
-            SpawnBacteria();
-            SpawnBacteria();
+            SpawnMicrobe();
+            SpawnMicrobe();
+            SpawnMicrobe();
+            SpawnMicrobe();
+            SpawnMicrobe();
+            SpawnMicrobe();
             StartCoroutine(TickSpawn());
         }
 
-        public void SpawnBacteria()
+        public void SpawnMicrobe()
         {
             var randomPoint = GetRandomPointInSpawnArea();
             var spawnDataIndex = RandomUtility.RandomWeightedTable(liquidSpawnData.Select(x => x.weight).ToArray());
-            var bacteriaPrefab = liquidSpawnData[spawnDataIndex].microbe.prefab;
-            var bacteria = Instantiate(bacteriaPrefab,randomPoint,Quaternion.identity);
-            bacteria.transform.SetParent(spawnedObjectsParent);
+            var microbePrefab = liquidSpawnData[spawnDataIndex].microbe.prefab;
+            var microbe = Instantiate(microbePrefab, randomPoint,Quaternion.identity);
+            microbe.transform.SetParent(spawnedObjectsParent);
+        }
+
+        public void SpawnMicrobe(Vector3 position, GameObject microbe)
+        {
+            var spawnedMicrobe = Instantiate(microbe, position, Quaternion.identity);
+            spawnedMicrobe.transform.SetParent(spawnedObjectsParent);
         }
 
         IEnumerator TickSpawn()
@@ -53,7 +59,7 @@ namespace Core
             {
                 if (Random.Range(0f, 1f) <= (spawnChancePerSecond / (100 * spawnTriesPerSecond)))
                 {
-                    SpawnBacteria();
+                    SpawnMicrobe();
                 }
                 yield return wait;
             }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Core::Core.MicrobeStatsSO
   stats:
   - stat: {fileID: 11400000, guid: ced09d1380c8e5d4c8859f823158f7c0, type: 2}
-    value: 1.5
+    value: 2
   - stat: {fileID: 11400000, guid: e936e6ff57fd2284b830f525dd66ae0c, type: 2}
     value: 15
   - stat: {fileID: 11400000, guid: 6275dd897caba774ea041a54c291c4a4, type: 2}
@@ -27,4 +27,6 @@ MonoBehaviour:
     value: 1.06
   - stat: {fileID: 11400000, guid: 05f41f6125cb3c44bb5454232de55ac6, type: 2}
     value: 2
-  harvesterStats: {fileID: 11400000, guid: 3f8e7fdd6dbb8584d9a04f44e0918366, type: 2}
+  - stat: {fileID: 11400000, guid: 3e70b685b023b764883cf322b9c0bc1e, type: 2}
+    value: 8
+  harvesterStats: {fileID: 11400000, guid: c9d3c5cf909e4744294c50771e0a8054, type: 2}

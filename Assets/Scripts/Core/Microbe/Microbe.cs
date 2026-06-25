@@ -68,7 +68,7 @@ namespace Core
 
             IngameEvents.MicrobeKilledByPlayer.Invoke(this);
 
-            Destroy(effect, effect.main.duration);
+            Destroy(effect.gameObject, effect.main.duration);
             Destroy(gameObject);
         }
 

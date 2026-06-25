@@ -21,5 +21,14 @@ namespace Common
         public AmplifierScope amplifierScope;
         public double value;
         public int stackCount;
+
+        public string GetDisplayString(int valueRoundAmount = 2)
+        {
+            string symbol = amplifierType == AmplifierType.TruePercentage ? "* " : "+ ";
+            string valueText = $"{value.AsRoundStr(valueRoundAmount)}";
+            string percentage = $"{(amplifierType != AmplifierType.Plus ? "% " : " ")}";
+            string statText = $"{stat.attributeName}";
+            return symbol + valueText + percentage + statText;
+        }
     }
 }
