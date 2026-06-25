@@ -19,8 +19,8 @@ public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
     [SerializeField] private ItemDefinitionSOContainer itemDefinitionSOContainer;
     public static ItemDefinitionSOContainer ItemDefinitionSOContainer { get; set; }
 
-    [SerializeField] private CapsuleStatsSOContainer capsuleStatsSOContainer;
-    public static CapsuleStatsSOContainer CapsuleStatsSOContainer { get; set; }
+    [SerializeField] private CapsuleSOContainer capsuleSOContainer;
+    public static CapsuleSOContainer CapsuleSOContainer { get; set; }
 
     [SerializeField] private MicrobeStatsSOContainer microbeStatsSOContainer;
     public static MicrobeStatsSOContainer MicrobeStatsSOContainer { get; set; }
@@ -37,6 +37,9 @@ public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
     [SerializeField] private BoosterSOContainer boosterSOContainer;
     public static BoosterSOContainer BoosterSOContainer { get; set; }
 
+    [SerializeField] private JarSOContainer jarSOContainer;
+    public static JarSOContainer JarSOContainer { get; set; }
+
     void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
     {
         _onReady = onReady;
@@ -48,12 +51,14 @@ public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
         CurrencySOContainer = currencySOContainer;
         StatSOContainer = statSOContainer;
         ItemDefinitionSOContainer = itemDefinitionSOContainer;
-        CapsuleStatsSOContainer = capsuleStatsSOContainer;
+        CapsuleSOContainer = capsuleSOContainer;
         MicrobeStatsSOContainer = microbeStatsSOContainer;
         HarvesterStatsSOContainer = harvesterStatsSOContainer;
         LiquidSOContainer = liquidSOContainer;
         MicrobeSOContainer = microbeSOContainer;
         BoosterSOContainer = boosterSOContainer;
+        JarSOContainer = jarSOContainer;
+
         _onReady.Invoke(this);
     }
 

@@ -21,13 +21,11 @@ namespace Core
         }
 
         public void HandleSpinLanded()
-        {
-            Debug.Log($"Spin landed on {name}");
+        { 
         }
 
         public void HandleUserSelected()
         {
-            Debug.Log(boosterSO.GetDisplayString());
             boosterSO.Activate();
         }
 

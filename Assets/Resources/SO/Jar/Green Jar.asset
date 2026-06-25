@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b485d61c33115479db9bca2a9e6876, type: 3}
+  m_Name: Green Jar
+  m_EditorClassIdentifier: Core::Core.JarSO
+  icon: {fileID: 21300000, guid: eb50ab777381fb3458aa13208a8ad0e2, type: 3}
+  jarMaterial: {fileID: 2100000, guid: 3e9af75935623874eacf232b2379a00a, type: 2}
+  roundsBeforeBoss: 2
+  maxRounds: 6
+  description: Boss rounds every 3 rounds. 6 round total

@@ -13,5 +13,13 @@ MonoBehaviour:
   m_Name: LiquidSOContainer
   m_EditorClassIdentifier: Core::Core.Generated.LiquidSOContainer
   liquidSOArray:
+  - {fileID: 11400000, guid: c92620458e0031247b8b1449dc857f4f, type: 2}
+  - {fileID: 11400000, guid: a998fcc61ca0f294095f531ed675e256, type: 2}
+  - {fileID: 11400000, guid: 67a004f70c8dd3e408540b0d50f37dd8, type: 2}
+  - {fileID: 11400000, guid: 663a231706833d5499c44bc1bcce427b, type: 2}
   - {fileID: 11400000, guid: 5ce53e84a1010db4f837a8339afd1175, type: 2}
-  basicLiquid: {fileID: 11400000, guid: 5ce53e84a1010db4f837a8339afd1175, type: 2}
+  glitchedLiquid: {fileID: 11400000, guid: c92620458e0031247b8b1449dc857f4f, type: 2}
+  greenLiquid: {fileID: 11400000, guid: a998fcc61ca0f294095f531ed675e256, type: 2}
+  purpleLiquid: {fileID: 11400000, guid: 67a004f70c8dd3e408540b0d50f37dd8, type: 2}
+  redLiquid: {fileID: 11400000, guid: 663a231706833d5499c44bc1bcce427b, type: 2}
+  turkoiseLiquid: {fileID: 11400000, guid: 5ce53e84a1010db4f837a8339afd1175, type: 2}

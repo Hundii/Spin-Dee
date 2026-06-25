@@ -7,7 +7,7 @@ namespace Core
 {
     public class Capsule : MonoBehaviour, IStatsHandlerHolder, IHarvesterStatsHolder
     {
-        private CapsuleStatsSO capsuleStatsSO;
+        private CapsuleSO capsuleStatsSO;
         private List<Harvester> harvesters = new();
         public StatsHandler StatsHandler { get; private set; }
 
@@ -19,7 +19,7 @@ namespace Core
 
         private void Awake()
         {
-            capsuleStatsSO = SOContainerContainer.CapsuleStatsSOContainer.god;
+            capsuleStatsSO = SOContainerContainer.CapsuleSOContainer.glitch;
             StatsHandler = new(new(capsuleStatsSO.stats.Select(x=>x.stat),capsuleStatsSO.stats.Select(x=>x.value)));
         }
 

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de9e83f70f35fc348a686deb226abe5c, type: 3}
+  m_Name: CapsuleSOContainer
+  m_EditorClassIdentifier: Core::Core.Generated.CapsuleSOContainer
+  capsuleSOArray:
+  - {fileID: 11400000, guid: 0e0578eff5d274040a8c7c3559c71640, type: 2}
+  - {fileID: 11400000, guid: 1f7ec625357c28744b6a7bdf0fe5c879, type: 2}
+  - {fileID: 11400000, guid: ae74008fb30091e4590e5c9a13887979, type: 2}
+  - {fileID: 11400000, guid: 48fa3592c9436bc40a9248d2bc385a6e, type: 2}
+  - {fileID: 11400000, guid: 92c5714f34a970f46acf541122bd47bb, type: 2}
+  blue: {fileID: 11400000, guid: 0e0578eff5d274040a8c7c3559c71640, type: 2}
+  glitch: {fileID: 11400000, guid: 1f7ec625357c28744b6a7bdf0fe5c879, type: 2}
+  gold: {fileID: 11400000, guid: ae74008fb30091e4590e5c9a13887979, type: 2}
+  red: {fileID: 11400000, guid: 48fa3592c9436bc40a9248d2bc385a6e, type: 2}
+  white: {fileID: 11400000, guid: 92c5714f34a970f46acf541122bd47bb, type: 2}

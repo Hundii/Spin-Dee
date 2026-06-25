@@ -74,6 +74,11 @@ namespace Core
             UserSelectedSlot.Invoke(this);
         }
 
+        public void ShowSelectButton()
+        {
+            selectButton.SetActive(true);
+        }
+
         public ISlotMachineItem GetSelectedItem()
         {
             return slotItems[selectedIndex];
