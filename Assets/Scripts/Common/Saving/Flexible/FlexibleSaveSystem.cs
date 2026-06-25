@@ -95,6 +95,12 @@ namespace Common.Saving.Flexible
             saveFiles = new();
         }
 
+        public static void DeleteProfile(string profileName)
+        {
+            FileSaveManager.DeleteAllFiles(profileName);
+            saveFiles = new();
+        }
+
         public static void DeleteAllSaveFiles(bool clearCache = true)
         {
             FileSaveManager.DeleteAllFiles();
@@ -117,10 +123,20 @@ namespace Common.Saving.Flexible
             CurrentProfile = newProfile;
         }
 
+        public static void CreateProfile(string profileName)
+        {
+            FileSaveManager.CreateProfile(profileName);
+        }
+        public static DirectoryInfo GetMetadataOfProfile(string profileName)
+        {
+            return FileSaveManager.GetMetaDataOfProfile(profileName);
+        }
+
         private static string GetFileNameWithProfile(string fileName)
         {
             return Path.Combine(CurrentProfile, fileName);
         }
+
 
         private static List<string> GetFileNamesWithProfile(ICollection<string> fileNames)
         {

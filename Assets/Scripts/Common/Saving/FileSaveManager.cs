@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace Common.Saving
@@ -161,16 +160,46 @@ namespace Common.Saving
         public static List<string> GetDirectories(string path = "", bool fullPath = false)
         {
             path = Path.Combine(Application.persistentDataPath, savePath, path);
-            var directories = Directory.GetDirectories(path).ToList();
-            if (fullPath)
+            try
             {
+                var directories = Directory.GetDirectories(path).ToList();
+                if (fullPath)
+                {
+                    return directories;
+                }
+                for (int i = 0; i < directories.Count; i++)
+                {
+                    directories[i] = Path.GetFileName(directories[i]);
+                }
                 return directories;
             }
-            for (int i = 0; i < directories.Count; i++)
+            catch (Exception ex)
             {
-                directories[i] = Path.GetFileName(directories[i]);
+                CustomLogger.LogError("Couldn't get directories", LogGroupFlags.SaveAndLoad);
+                CustomLogger.LogError(ex.Message);
+                return new();
             }
-            return directories;
+            
+        }
+
+        public static void CreateProfile(string profileName)
+        {
+            string path = Path.Combine(Application.persistentDataPath, savePath, profileName);
+            if (Directory.Exists(path))
+            {
+                return;
+            }
+            Directory.CreateDirectory(path);
+        }
+
+        public static DirectoryInfo GetMetaDataOfProfile(string profileName)
+        {
+            string path = Path.Combine(Application.persistentDataPath, savePath, profileName);
+            if (!Directory.Exists(path))
+            {
+                return null;
+            }
+            return new DirectoryInfo(path);
         }
     }
 }
