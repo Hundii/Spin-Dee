@@ -1,5 +1,7 @@
 using Common;
+using Core.Generated;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Core
@@ -12,12 +14,33 @@ namespace Core
 
         private Jar jar;
 
+        private StatSOContainer statSOContainer;
+        private StatsHandler statsHandler;
+        private RoundAmplifierHandler roundAmplifierHandler;
+
         private float spawnChancePerSecond;
 
+        private void OnEnable()
+        {
+            IngameEvents.RoundStarted += HandleRoundStarted;
+        }
         void Start()
         {
             jar = GetComponent<Jar>();
-            spawnChancePerSecond = jar.GetLiquidSO().moleculeSpawnChancePerSecond;
+            statSOContainer = SOContainerContainer.StatSOContainer;
+            roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
+
+            statsHandler = new(new(
+                    new List<Stat>()
+                    {
+                        SOContainerContainer.StatSOContainer.moleculeSpawnRate
+                    },
+                    new List<double>()
+                    {
+                        jar.GetLiquidSO().moleculeSpawnChancePerSecond
+                    }));
+            statsHandler.valueChanged += HandleStatChanged;
+            HandleStatChanged();
 
             SpawnMolecule();
             SpawnMolecule();
@@ -32,6 +55,17 @@ namespace Core
             molecule.Init(moleculeSO);
         }
 
+        private void HandleStatChanged()
+        {
+            statsHandler.TryGetAttributeValue(statSOContainer.moleculeSpawnRate, out var value);
+            spawnChancePerSecond = (float)value;
+        }
+
+        private void HandleRoundStarted()
+        {
+            statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentMoleculeSpawnRate);
+        }
+
         IEnumerator TickSpawn()
         {
             var wait = new WaitForSeconds(1 / spawnTriesPerSecond);
@@ -43,6 +77,11 @@ namespace Core
                 }
                 yield return wait;
             }
+        }
+
+        private void OnDisable()
+        {
+            IngameEvents.RoundStarted -= HandleRoundStarted;
         }
     }
 }

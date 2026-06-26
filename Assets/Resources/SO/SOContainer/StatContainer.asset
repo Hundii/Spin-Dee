@@ -18,7 +18,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 58818d84ad0280043aa684718507ddef, type: 2}
   - {fileID: 11400000, guid: 6275dd897caba774ea041a54c291c4a4, type: 2}
   - {fileID: 11400000, guid: e936e6ff57fd2284b830f525dd66ae0c, type: 2}
+  - {fileID: 11400000, guid: ec7aadc6a446729449721c594ad2e323, type: 2}
   - {fileID: 11400000, guid: 3e70b685b023b764883cf322b9c0bc1e, type: 2}
+  - {fileID: 11400000, guid: b3707ccb62aa8f34393ea73b726ee203, type: 2}
   - {fileID: 11400000, guid: ced09d1380c8e5d4c8859f823158f7c0, type: 2}
   - {fileID: 11400000, guid: 643e14ef27aeefc40bd5a2e1dd597154, type: 2}
   - {fileID: 11400000, guid: 7198428e090b3fc44a0adf895a4a4d6d, type: 2}
@@ -30,7 +32,9 @@ MonoBehaviour:
   harvestAmount: {fileID: 11400000, guid: 58818d84ad0280043aa684718507ddef, type: 2}
   harvestSpeed: {fileID: 11400000, guid: 6275dd897caba774ea041a54c291c4a4, type: 2}
   health: {fileID: 11400000, guid: e936e6ff57fd2284b830f525dd66ae0c, type: 2}
+  microbeSpawnRate: {fileID: 11400000, guid: ec7aadc6a446729449721c594ad2e323, type: 2}
   moleculeDetectionRange: {fileID: 11400000, guid: 3e70b685b023b764883cf322b9c0bc1e, type: 2}
+  moleculeSpawnRate: {fileID: 11400000, guid: b3707ccb62aa8f34393ea73b726ee203, type: 2}
   moveSpeed: {fileID: 11400000, guid: ced09d1380c8e5d4c8859f823158f7c0, type: 2}
   pointWorth: {fileID: 11400000, guid: 643e14ef27aeefc40bd5a2e1dd597154, type: 2}
   reproductionModifier: {fileID: 11400000, guid: 7198428e090b3fc44a0adf895a4a4d6d, type: 2}

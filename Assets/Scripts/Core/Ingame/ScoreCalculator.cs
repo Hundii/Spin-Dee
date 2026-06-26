@@ -27,7 +27,8 @@ namespace Core
             IngameEvents.MicrobeKilledByPlayer += HandleMicrobeKilled;
             IngameEvents.MoleculeMaterialHarvestedByMicrobe += HandleMaterialHarvestedByMicrobe;
             IngameEvents.MoleculeMaterialHarvestedByPlayer += HandleMaterialHarvestedByPlayer;
-            IngameEvents.ScoreBoosterGained.RegisterListener(HandleScoreBoosterActivated);
+            IngameEvents.ScoreBoosterGained += HandleScoreBoosterActivated;
+            IngameEvents.RoundEnded += HandleRoundEnded;
         }
 
         private void HandleMicrobeKilled(Microbe microbe)
@@ -47,7 +48,7 @@ namespace Core
 
         public float GetScoreRequirement()
         {
-            return 100f;
+            return 0f;
         }
 
         public void HandleScoreBoosterActivated(ScoreBoosterSO scoreBoosterSO)
@@ -59,12 +60,23 @@ namespace Core
             Debug.Log(CurrentScore);
         }
 
+        private void HandleRoundEnded()
+        {
+            if (CurrentScore < GetScoreRequirement())
+            {
+                IngameEvents.RoundLost.Invoke();
+                return;
+            }
+            IngameEvents.RoundWon.Invoke();
+        }
+
         private void OnDisable()
         {
             IngameEvents.MicrobeKilledByPlayer -= HandleMicrobeKilled;
             IngameEvents.MoleculeMaterialHarvestedByMicrobe -= HandleMaterialHarvestedByMicrobe;
             IngameEvents.MoleculeMaterialHarvestedByPlayer -= HandleMaterialHarvestedByPlayer;
             IngameEvents.ScoreBoosterGained -= HandleScoreBoosterActivated;
+            IngameEvents.RoundEnded -= HandleRoundEnded;
         }
     }
 }

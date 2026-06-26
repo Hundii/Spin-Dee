@@ -15,5 +15,9 @@ namespace Core
         public static GameEvent<ScoreBoosterSO> ScoreBoosterGained { get; set; } = new();
         public static GameEvent<float> ScoreChanged { get; set; } = new();
         public static GameEvent<int> RoundEnded { get; set; } = new();
+        public static GameEvent RoundWon { get; set; } = new();
+        public static GameEvent RoundLost { get; set; } = new();
+        public static GameEvent RoundContinuedByPlayer { get; set; } = new();
+        public static GameEvent<int> RoundStarted { get; set; } = new();
     }
 }

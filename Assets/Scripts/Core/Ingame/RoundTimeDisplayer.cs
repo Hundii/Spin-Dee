@@ -22,6 +22,7 @@ namespace Core
         private void OnEnable()
         {
             IngameEvents.RoundEnded.RegisterListener(UpdateRoundText);
+            IngameEvents.RoundStarted.RegisterListener(UpdateRoundText);
         }
 
         private void Start()
@@ -65,6 +66,7 @@ namespace Core
         private void OnDisable()
         {
             IngameEvents.RoundEnded.UnRegisterListener(UpdateRoundText);
+            IngameEvents.RoundStarted.UnRegisterListener(UpdateRoundText);
         }
 
     }

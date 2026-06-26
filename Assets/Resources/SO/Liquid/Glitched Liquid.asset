@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Glitched Liquid
   m_EditorClassIdentifier: Core::Core.LiquidSO
   icon: {fileID: 21300000, guid: f1c8b9f23648fe144b69b2a35000d0d1, type: 3}
-  liquidMaterial: {fileID: 2100000, guid: 722bcb4ed79dca14ea7f583e354c1bfa, type: 2}
+  liquidMaterial: {fileID: 2100000, guid: 45e061828c3d0534ba5ae143cd41a06f, type: 2}
   spawnData:
   - microbe: {fileID: 11400000, guid: 23b088c5a32c2374988a9aa38e434617, type: 2}
     weight: 1

@@ -20,6 +20,11 @@ namespace Core
             jarSO = sceneData == null ? SOContainerContainer.JarSOContainer.turkoiseJar : sceneData.jarSO;
         }
 
+        private void OnEnable()
+        {
+            IngameEvents.RoundContinuedByPlayer += HandleRoundContinuedByPlayer;
+        }
+
         private void Update()
         {
             if (isPaused)
@@ -67,6 +72,11 @@ namespace Core
             return jarSO.maxRounds;
         }
 
+        public void HandleRoundContinuedByPlayer()
+        {
+            IngameEvents.RoundStarted.Invoke(CurrentRound);
+        }
+
         public void Pause()
         {
             isPaused = true;
@@ -75,6 +85,11 @@ namespace Core
         public void Resume()
         {
             isPaused = false;
+        }
+
+        private void OnDisable()
+        {
+            IngameEvents.RoundContinuedByPlayer -= HandleRoundContinuedByPlayer;
         }
     }
 }

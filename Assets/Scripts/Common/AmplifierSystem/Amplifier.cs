@@ -30,5 +30,20 @@ namespace Common
             string statText = $"{stat.attributeName}";
             return symbol + valueText + percentage + statText;
         }
+
+        public Amplifier()
+        {
+            
+        }
+
+        public Amplifier(Amplifier other)
+        {
+            uniqueTag = other.uniqueTag;
+            stat = other.stat;
+            amplifierType = other.amplifierType;
+            amplifierScope = other.amplifierScope;
+            value = other.value;
+            stackCount = other.stackCount;
+        }
     }
 }

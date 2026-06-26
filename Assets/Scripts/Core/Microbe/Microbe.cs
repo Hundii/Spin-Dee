@@ -36,6 +36,12 @@ namespace Core
             }
         }
 
+        private void Start()
+        {
+            var roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
+            statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentStrongerMicrobe);
+        }
+
         private void HandleMaterialHarvested(float amount)
         {
             IngameEvents.MoleculeMaterialHarvestedByMicrobe.Invoke(amount);

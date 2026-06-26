@@ -1,4 +1,5 @@
 using Common;
+using Core.Generated;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,36 @@ namespace Core
 
         private Jar jar;
 
+        private StatSOContainer statSOContainer;
+        private StatsHandler statsHandler;
+        private RoundAmplifierHandler roundAmplifierHandler;
+
         private float spawnChancePerSecond;
+
+        private void OnEnable()
+        {
+            IngameEvents.RoundStarted += HandleRoundStarted;
+        }
 
         void Start()
         {
+            statSOContainer = SOContainerContainer.StatSOContainer;
+            roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
             jar = GetComponent<Jar>();
             var liquidSO = jar.GetLiquidSO();
             liquidSpawnData = jar.GetLiquidSO().spawnData;
-            spawnChancePerSecond = liquidSO.microbeSpawnChancePerSecond;
+
+            statsHandler = new(new(
+                    new List<Stat>()
+                    {
+                        SOContainerContainer.StatSOContainer.microbeSpawnRate 
+                    }, 
+                    new List<double>() 
+                    { 
+                        liquidSO.microbeSpawnChancePerSecond
+                    }));
+            statsHandler.valueChanged += HandleStatChanged;
+            HandleStatChanged();
 
             SpawnMicrobe();
             StartCoroutine(TickSpawn());
@@ -44,6 +67,17 @@ namespace Core
             spawnedMicrobe.transform.SetParent(spawnedObjectsParent);
         }
 
+        private void HandleStatChanged()
+        {
+            statsHandler.TryGetAttributeValue(statSOContainer.microbeSpawnRate, out var value);
+            spawnChancePerSecond = (float)value;
+        }
+
+        private void HandleRoundStarted()
+        {
+            statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentMicrobeSpawnRate);
+        }
+
         IEnumerator TickSpawn()
         {
             var wait = new WaitForSeconds(1 / spawnTriesPerSecond);
@@ -55,6 +89,11 @@ namespace Core
                 }
                 yield return wait;
             }
+        }
+
+        private void OnDisable()
+        {
+            IngameEvents.RoundStarted -= HandleRoundStarted;
         }
     }
 }
