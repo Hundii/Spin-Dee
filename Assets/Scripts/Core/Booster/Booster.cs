@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +20,11 @@ namespace Core
         }
 
         public void HandleSpinLanded()
-        { 
+        {
+            if (boosterSO.generalRarity == GeneralRarity.Tier4)
+            {
+                WebGLLocalStorage.Save();
+            }
         }
 
         public void HandleUserSelected()
