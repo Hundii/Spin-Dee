@@ -48,7 +48,6 @@ namespace Common
                     default:
                         break;
                 }
-                CustomLogger.Log(additiveMultiplier);
             }
             public double GetBuffedValue()
             {

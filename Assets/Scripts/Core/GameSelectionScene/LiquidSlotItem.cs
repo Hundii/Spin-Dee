@@ -40,5 +40,10 @@ namespace Core
         {
             selectionHandler.SelectLiquid(liquidSO);
         }
+
+        public void HandleUserDeselected()
+        {
+            selectionHandler.DeselectLiquid(liquidSO);
+        }
     }
 }

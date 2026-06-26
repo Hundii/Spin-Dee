@@ -21,6 +21,10 @@ MonoBehaviour:
     weight: 2
   - microbe: {fileID: 11400000, guid: f3afdd07369a1774ca69ec360790732c, type: 2}
     weight: 1
+  bossSpawnData:
+  - microbe: {fileID: 11400000, guid: 22bab943f7b90154c994b9037117c4c7, type: 2}
+    weight: 1
   microbeSpawnChancePerSecond: 15
   moleculeSpawnChancePerSecond: 5
   description: Viruses love this liquid. Perfect place to find HIV and Herpes.
+  isStarter: 0

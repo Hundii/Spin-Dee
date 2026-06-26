@@ -46,5 +46,10 @@ namespace Core
         {
             return boosterSO.GetDisplayString();
         }
+
+        public void HandleUserDeselected()
+        {
+            
+        }
     }
 }

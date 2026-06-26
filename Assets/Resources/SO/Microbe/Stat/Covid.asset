@@ -29,4 +29,6 @@ MonoBehaviour:
     value: 2
   - stat: {fileID: 11400000, guid: 3e70b685b023b764883cf322b9c0bc1e, type: 2}
     value: 8
+  - stat: {fileID: 11400000, guid: 643e14ef27aeefc40bd5a2e1dd597154, type: 2}
+    value: 8
   harvesterStats: {fileID: 11400000, guid: c9d3c5cf909e4744294c50771e0a8054, type: 2}

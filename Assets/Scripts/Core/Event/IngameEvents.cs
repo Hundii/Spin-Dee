@@ -6,6 +6,7 @@ namespace Core
     public static class IngameEvents
     {
         public static GameEvent<Microbe> MicrobeKilledByPlayer { get; set; } = new();
+        public static GameEvent<float> PlayerMoleculeMaterialChanged { get; set; } = new();
         public static GameEvent<float> MoleculeMaterialHarvestedByPlayer { get; set; } = new();
         public static GameEvent<float> MoleculeMaterialHarvestedByMicrobe { get; set; } = new();
         public static GameEvent<float> ExperienceEarned { get; set; } = new();
@@ -13,5 +14,6 @@ namespace Core
         public static GameEvent<StatBoosterSO> CapsuleBoosterGained { get; set; } = new();
         public static GameEvent<ScoreBoosterSO> ScoreBoosterGained { get; set; } = new();
         public static GameEvent<float> ScoreChanged { get; set; } = new();
+        public static GameEvent<int> RoundEnded { get; set; } = new();
     }
 }

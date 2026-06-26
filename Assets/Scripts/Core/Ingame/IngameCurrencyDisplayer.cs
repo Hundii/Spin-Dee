@@ -12,20 +12,21 @@ namespace Core
         private void Start()
         {
             ingameInventory = this.Inject<IngameInventory>();
+            HandleMoleculeMaterialChanged();
         }
 
         private void OnEnable()
         {
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.PlayerMoleculeMaterialChanged.RegisterListener(HandleMoleculeMaterialChanged);
         }
 
-        public void HandleMoleculeMaterialHarvestedByPlayer(float amount)
+        public void HandleMoleculeMaterialChanged()
         {
-            moleculeMaterialText.text = ingameInventory.GetCurrentMoleculeMaterial().ToString();
+            moleculeMaterialText.text = ingameInventory.MoleculeMaterial.AsRoundStr(1);
         }
         private void OnDisable()
         {
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialChanged);
 
         }
     }

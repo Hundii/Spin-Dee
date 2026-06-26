@@ -40,5 +40,10 @@ namespace Core
         {
             selectionHandler.SelectJar(jarSO);
         }
+
+        public void HandleUserDeselected()
+        {
+            selectionHandler.DeselectJar(jarSO);
+        }
     }
 }

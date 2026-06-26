@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Core
 {
     [RequireComponent(typeof(Jar))]
-    public class MoleculeSpawner : GenericSpawner
+    public class MoleculeSpawner : GenericSpawner, INonPersistentManager
     {
         [SerializeField] private Transform spawnedObjectsParent;
         [SerializeField] private MoleculeSO moleculeSO;
@@ -14,15 +14,11 @@ namespace Core
 
         private float spawnChancePerSecond;
 
-        private void Awake()
+        void Start()
         {
             jar = GetComponent<Jar>();
             spawnChancePerSecond = jar.GetLiquidSO().moleculeSpawnChancePerSecond;
-        }
-        void Start()
-        {
-            SpawnMolecule();
-            SpawnMolecule();
+
             SpawnMolecule();
             SpawnMolecule();
             StartCoroutine(TickSpawn());

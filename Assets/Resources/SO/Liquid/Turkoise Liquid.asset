@@ -19,6 +19,9 @@ MonoBehaviour:
     weight: 3
   - microbe: {fileID: 11400000, guid: f4def9502d21e104387729dc2c0ff67a, type: 2}
     weight: 1
+  bossSpawnData:
+  - microbe: {fileID: 11400000, guid: 22bab943f7b90154c994b9037117c4c7, type: 2}
+    weight: 1
   microbeSpawnChancePerSecond: 8
   moleculeSpawnChancePerSecond: 5
   description: Basic liquid. Influenza Virus lives here

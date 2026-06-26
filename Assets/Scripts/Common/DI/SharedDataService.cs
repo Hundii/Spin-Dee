@@ -27,12 +27,20 @@ namespace Common
 
         public T GetData<T>(bool deleteDataAfterGet = true)
         {
-            T data = (T)Data;
-            if (deleteDataAfterGet)
+            try
             {
-                DeleteData();
+                T data = (T)Data;
+                if (deleteDataAfterGet)
+                {
+                    DeleteData();
+                }
+                return data;
             }
-            return data;
+            catch
+            {
+                return default;
+            }
+           
         }
 
         public void DeleteData()

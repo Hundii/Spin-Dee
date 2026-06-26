@@ -10,6 +10,7 @@ namespace Core
         public Sprite icon;
         public Material liquidMaterial;
         public List<LiquidSpawnData> spawnData;
+        public List<LiquidSpawnData> bossSpawnData;
         public float microbeSpawnChancePerSecond;
         public float moleculeSpawnChancePerSecond;
         public string description;

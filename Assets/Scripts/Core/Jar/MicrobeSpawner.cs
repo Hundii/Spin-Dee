@@ -18,21 +18,13 @@ namespace Core
 
         private float spawnChancePerSecond;
 
-        private void Awake()
+        void Start()
         {
             jar = GetComponent<Jar>();
             var liquidSO = jar.GetLiquidSO();
             liquidSpawnData = jar.GetLiquidSO().spawnData;
             spawnChancePerSecond = liquidSO.microbeSpawnChancePerSecond;
-        }
 
-        void Start()
-        {
-            SpawnMicrobe();
-            SpawnMicrobe();
-            SpawnMicrobe();
-            SpawnMicrobe();
-            SpawnMicrobe();
             SpawnMicrobe();
             StartCoroutine(TickSpawn());
         }

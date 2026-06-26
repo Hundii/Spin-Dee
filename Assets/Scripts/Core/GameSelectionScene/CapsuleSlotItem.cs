@@ -40,5 +40,10 @@ namespace Core
         {
             selectionHandler.SelectCapsule(capsuleSO);
         }
+
+        public void HandleUserDeselected()
+        {
+            selectionHandler.DeselectCapsule(capsuleSO);
+        }
     }
 }

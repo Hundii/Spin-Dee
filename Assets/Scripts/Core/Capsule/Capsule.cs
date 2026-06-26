@@ -7,6 +7,7 @@ namespace Core
 {
     public class Capsule : MonoBehaviour, IStatsHandlerHolder, IHarvesterStatsHolder
     {
+        [SerializeField] private MeshRenderer meshRenderer;
         private CapsuleSO capsuleStatsSO;
         private List<Harvester> harvesters = new();
         public StatsHandler StatsHandler { get; private set; }
@@ -19,7 +20,10 @@ namespace Core
 
         private void Awake()
         {
-            capsuleStatsSO = SOContainerContainer.CapsuleSOContainer.glitch;
+            var capsuleSO = this.Inject<SharedDataService>().GetData<GameSelectionSceneData>(false)?.capsuleStatSO;
+            capsuleStatsSO = capsuleSO == null ? SOContainerContainer.CapsuleSOContainer.glitch : capsuleSO;
+            meshRenderer.material = capsuleStatsSO.capsuleMaterial;
+
             StatsHandler = new(new(capsuleStatsSO.stats.Select(x=>x.stat),capsuleStatsSO.stats.Select(x=>x.value)));
         }
 

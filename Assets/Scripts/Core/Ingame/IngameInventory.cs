@@ -5,7 +5,19 @@ namespace Core
 {
     public class IngameInventory : MonoBehaviour, INonPersistentManager
     {
-        private float moleculeMaterial;
+        private float _moleculeMaterial;
+        public float MoleculeMaterial
+        {
+            get
+            {
+                return _moleculeMaterial;
+            }
+            private set
+            {
+                _moleculeMaterial = value;
+                IngameEvents.PlayerMoleculeMaterialChanged.Invoke(value);
+            }
+        }
 
         private void OnEnable()
         {
@@ -14,12 +26,17 @@ namespace Core
 
         public void HandleMoleculeMaterialHarvestedByPlayer(float amount)
         {
-            moleculeMaterial += amount;
+            MoleculeMaterial += amount;
         }
 
-        public float GetCurrentMoleculeMaterial()
+        public bool HasEnoughMaterial(float amount)
         {
-            return moleculeMaterial;
+            return MoleculeMaterial >= amount;
+        }
+
+        public void AddMoleculeMaterial(float amount)
+        {
+            MoleculeMaterial += amount;
         }
 
         private void OnDisable()

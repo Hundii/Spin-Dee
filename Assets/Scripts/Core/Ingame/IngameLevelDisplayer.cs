@@ -7,9 +7,7 @@ namespace Core
     public class IngameLevelDisplayer : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private TextMeshProUGUI currentLevelText;
-        [SerializeField] private TextMeshProUGUI currentExperienceText;
-        [SerializeField] private TextMeshProUGUI experienceRequirementText;
+        [SerializeField] private TextMeshProUGUI experienceText;
 
         private IngameLevelHandler ingameLevelHandler;
 
@@ -31,9 +29,9 @@ namespace Core
 
         public void UpdateTexts()
         {
-            currentLevelText.text = ingameLevelHandler.GetCurrentLevel().ToString();
-            currentExperienceText.text = ingameLevelHandler.GetCurrentExperience().ToString();
-            experienceRequirementText.text = ingameLevelHandler.GetLevelUpRequirement().ToString();
+            var currentExp = ingameLevelHandler.GetCurrentExperience();
+            var requiredExp = ingameLevelHandler.GetLevelUpRequirement();
+            experienceText.text = $"{currentExp.AsRoundStr(1)} / {requiredExp.AsRoundStr(1)}";
         }
 
         private void OnDisable()

@@ -3,6 +3,7 @@ using Core.Generated;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -11,6 +12,9 @@ namespace Core
         // Would have been wise to create a script for these but whatever
 
         [Header("References")]
+        [SerializeField] private GameObject slotsContainer;
+        [SerializeField] private GameObject itemSelectionContainer;
+
         [Header("Capsule")]
         [SerializeField] private SlotMachineSlot capsuleSlot;
         [SerializeField] private TextMeshProUGUI capsuleDescription;
@@ -87,16 +91,54 @@ namespace Core
         public void SelectCapsule(CapsuleSO capsuleSO)
         {
             selectionSceneData.capsuleStatSO = capsuleSO;
+            ContinueIfAllSelected();
+        }
+
+        public void DeselectCapsule(CapsuleSO _)
+        {
+            selectionSceneData.capsuleStatSO = null;
         }
 
         public void SelectLiquid(LiquidSO liquidSO)
         {
             selectionSceneData.liquidSO = liquidSO;
+            ContinueIfAllSelected();
+        }
+
+        public void DeselectLiquid(LiquidSO _)
+        {
+            selectionSceneData.liquidSO = null;
         }
 
         public void SelectJar(JarSO jarSO)
         {
             selectionSceneData.jarSO = jarSO;
+            ContinueIfAllSelected();
+        }
+        public void DeselectJar(JarSO _)
+        {
+            selectionSceneData.jarSO = null;
+        }
+
+        public void ContinueIfAllSelected()
+        {
+            if (selectionSceneData.liquidSO != null && selectionSceneData.jarSO != null && selectionSceneData.capsuleStatSO != null)
+            {
+                slotsContainer.SetActive(false);
+                itemSelectionContainer.SetActive(true);
+            }
+        }
+
+        public void GoBack()
+        {
+            slotsContainer.SetActive(true);
+            itemSelectionContainer.SetActive(false);
+        }
+
+        public void Play()
+        {
+            this.Inject<SharedDataService>().SetData(selectionSceneData);
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

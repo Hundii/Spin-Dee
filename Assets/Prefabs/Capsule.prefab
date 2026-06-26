@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c1385592bf3844db4e00ea1fcdf238, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Core::Core.Capsule
+  meshRenderer: {fileID: 230147951987854792}
 --- !u!114 &1565269326170059204
 MonoBehaviour:
   m_ObjectHideFlags: 0

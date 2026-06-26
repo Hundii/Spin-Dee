@@ -12,6 +12,7 @@ namespace Core
         [Header("References")]
         [SerializeField] private Transform container;
         [SerializeField] private GameObject selectButton;
+        [SerializeField] private GameObject deselectButton;
 
         private SimpleScrollSnap scrollSnap;
 
@@ -20,18 +21,21 @@ namespace Core
         private int selectedIndex;
 
         public GameEvent<SlotMachineSlot> UserSelectedSlot { get; private set; } = new();
+        public GameEvent<SlotMachineSlot> UserDeselectedSlot { get; private set; } = new();
+        public GameEvent<SlotMachineSlot> SpinEnded { get; private set; } = new();
 
         private void Awake()
         {
             scrollSnap = GetComponent<SimpleScrollSnap>();
             scrollSnap.OnPanelSelected.AddListener(HandlePanelSelected);
             scrollSnap.UseUnscaledTime = true;
-            selectButton.SetActive(false);
+            HideButtons();
         }
 
         public void Spin()
         {
             scrollSnap.Velocity += Random.Range(25000, 50000) * Vector2.up;
+            HideButtons();
         }
 
         public void Clear()
@@ -43,7 +47,7 @@ namespace Core
             }
             slotItems = new();
             selectedIndex = -1;
-            selectButton.SetActive(false);
+            HideButtons();
         }
 
         public List<ISlotMachineItem> RegisterItems(ICollection<GameObject> items)
@@ -65,18 +69,40 @@ namespace Core
             slotItems.ElementAt(scrollSnap.CenteredPanel).HandleSpinLanded();
             selectedIndex = scrollSnap.CenteredPanel;
             selectButton.SetActive(true);
+            SpinEnded.Invoke(this);
         }
 
         public void SelectItem()
         {
             slotItems[selectedIndex].HandleUserSelected();
-            selectButton.SetActive(false);
+            HideButtons();
             UserSelectedSlot.Invoke(this);
+        }
+
+        public void DeselectItem()
+        {
+            slotItems[selectedIndex].HandleUserDeselected();
+            HideButtons();
+            UserDeselectedSlot.Invoke(this);
         }
 
         public void ShowSelectButton()
         {
             selectButton.SetActive(true);
+        }
+
+        public void ShowDeSelectButton()
+        {
+            deselectButton.SetActive(true);
+        }
+
+        public void HideButtons()
+        {
+            if (deselectButton != null)
+            {
+                deselectButton.SetActive(false);
+            }
+            selectButton.SetActive(false);
         }
 
         public ISlotMachineItem GetSelectedItem()
