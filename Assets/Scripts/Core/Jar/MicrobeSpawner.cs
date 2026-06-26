@@ -20,17 +20,22 @@ namespace Core
         private StatSOContainer statSOContainer;
         private StatsHandler statsHandler;
         private RoundAmplifierHandler roundAmplifierHandler;
+        private RoundHandler roundHandler;
+
+        private List<GameObject> spawnedMicrobes = new();
 
         private float spawnChancePerSecond;
 
         private void OnEnable()
         {
+            IngameEvents.RoundEnded += HandleRoundEnded;
             IngameEvents.RoundStarted += HandleRoundStarted;
         }
 
         void Start()
         {
             statSOContainer = SOContainerContainer.StatSOContainer;
+            roundHandler = this.Inject<RoundHandler>();
             roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
             jar = GetComponent<Jar>();
             var liquidSO = jar.GetLiquidSO();
@@ -59,6 +64,18 @@ namespace Core
             var microbePrefab = liquidSpawnData[spawnDataIndex].microbe.prefab;
             var microbe = Instantiate(microbePrefab, randomPoint,Quaternion.identity);
             microbe.transform.SetParent(spawnedObjectsParent);
+            spawnedMicrobes.Add(microbe);
+        }
+
+        public void SpawnBossMicrobe()
+        {
+            var bossSpawnData = jar.GetLiquidSO().bossSpawnData;
+            var randomPoint = GetRandomPointInSpawnArea();
+            var spawnDataIndex = RandomUtility.RandomWeightedTable(bossSpawnData.Select(x => x.weight).ToArray());
+            var microbePrefab = bossSpawnData[spawnDataIndex].microbe.prefab;
+            var microbe = Instantiate(microbePrefab, randomPoint, Quaternion.identity);
+            microbe.transform.SetParent(spawnedObjectsParent);
+            spawnedMicrobes.Add(microbe);
         }
 
         public void SpawnMicrobe(Vector3 position, GameObject microbe)
@@ -73,9 +90,29 @@ namespace Core
             spawnChancePerSecond = (float)value;
         }
 
+        private void HandleRoundEnded()
+        {
+            foreach (var microbe in spawnedMicrobes)
+            {
+                if (microbe != null)
+                {
+                    Destroy(microbe);
+                }
+            }
+            spawnedMicrobes = new();
+        }
+
         private void HandleRoundStarted()
         {
             statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentMicrobeSpawnRate);
+            if (roundHandler.IsCurrentRoundBossRound)
+            {
+                SpawnBossMicrobe();
+            }
+            else
+            {
+                SpawnMicrobe();
+            }
         }
 
         IEnumerator TickSpawn()
@@ -93,6 +130,7 @@ namespace Core
 
         private void OnDisable()
         {
+            IngameEvents.RoundEnded -= HandleRoundEnded;
             IngameEvents.RoundStarted -= HandleRoundStarted;
         }
     }

@@ -26,8 +26,6 @@ namespace Core
         {
             statsHandler = new(new(microbeSO.microbeStats.stats.Select(x => x.stat), microbeSO.microbeStats.stats.Select(x => x.value)));
             HealthSystem = new();
-            HealthSystem.Init(statsHandler);
-            HealthSystem.EntityDied.RegisterListener(HandleDeath);
 
             harvesters = GetComponentsInChildren<Harvester>();
             foreach (var harvester in harvesters)
@@ -40,6 +38,8 @@ namespace Core
         {
             var roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
             statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentStrongerMicrobe);
+            HealthSystem.Init(statsHandler);
+            HealthSystem.EntityDied.RegisterListener(HandleDeath);
         }
 
         private void HandleMaterialHarvested(float amount)

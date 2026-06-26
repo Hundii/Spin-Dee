@@ -13,7 +13,7 @@ namespace Core
 
         private void OnEnable()
         {
-            IngameEvents.ExperienceEarned.RegisterListener(HandleExperienceEarned,true);
+            IngameEvents.ExperienceEarned.RegisterListener(HandleExperienceEarned);
         }
 
         private void Start()

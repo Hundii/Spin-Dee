@@ -18,10 +18,13 @@ namespace Core
         private StatsHandler statsHandler;
         private RoundAmplifierHandler roundAmplifierHandler;
 
+        private List<GameObject> spawnedMolecules = new();
+
         private float spawnChancePerSecond;
 
         private void OnEnable()
         {
+            IngameEvents.RoundEnded += HandleRoundEnded;
             IngameEvents.RoundStarted += HandleRoundStarted;
         }
         void Start()
@@ -51,6 +54,7 @@ namespace Core
         {
             var randomPoint = GetRandomPointInSpawnArea();
             var molecule = Instantiate(moleculeSO.prefab, randomPoint, Quaternion.identity);
+            spawnedMolecules.Add(molecule.gameObject);
             molecule.transform.SetParent(spawnedObjectsParent);
             molecule.Init(moleculeSO);
         }
@@ -60,10 +64,21 @@ namespace Core
             statsHandler.TryGetAttributeValue(statSOContainer.moleculeSpawnRate, out var value);
             spawnChancePerSecond = (float)value;
         }
-
+        private void HandleRoundEnded()
+        {
+            foreach (var molecule in spawnedMolecules)
+            {
+                if (molecule != null)
+                {
+                    Destroy(molecule);
+                }
+            }
+            spawnedMolecules = new();
+        }
         private void HandleRoundStarted()
         {
             statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentMoleculeSpawnRate);
+            SpawnMolecule();
         }
 
         IEnumerator TickSpawn()
@@ -81,6 +96,7 @@ namespace Core
 
         private void OnDisable()
         {
+            IngameEvents.RoundEnded -= HandleRoundEnded;
             IngameEvents.RoundStarted -= HandleRoundStarted;
         }
     }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Generic Boss
   m_EditorClassIdentifier: Core::Core.BossMicrobeSO
   prefab: {fileID: 259407305997185464, guid: 56b12e838eb1748408c122f9a80d5e7d, type: 3}
-  microbeStats: {fileID: 0}
-  lootTable: {fileID: 0}
+  microbeStats: {fileID: 11400000, guid: 43a9097dc22510b4f9e8daca7ff84721, type: 2}
+  lootTable: {fileID: 11400000, guid: dc45a97ce08bb9940a98487536219e44, type: 2}

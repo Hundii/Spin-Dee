@@ -16,7 +16,7 @@ namespace Core
 
         private void Awake()
         {
-            var sceneData = this.Inject<SharedDataService>().GetData<GameSelectionSceneData>();
+            var sceneData = this.Inject<SharedDataService>().GetData<GameSelectionSceneData>(false);
             jarSO = sceneData == null ? SOContainerContainer.JarSOContainer.turkoiseJar : sceneData.jarSO;
         }
 
@@ -45,7 +45,7 @@ namespace Core
             CurrentRoundTime = 0f;
             IngameEvents.RoundEnded.Invoke(CurrentRound);
             CurrentRound++;
-            if (CurrentRound % (jarSO.roundsBeforeBoss + 2) == 0)
+            if (CurrentRound % (jarSO.roundsBeforeBoss + 1) == 0)
             {
                 IsCurrentRoundBossRound = true;
             }

@@ -133,6 +133,14 @@ namespace Core
         {
             slotsContainer.SetActive(true);
             itemSelectionContainer.SetActive(false);
+
+            DeselectCapsule(null);
+            DeselectJar(null);
+            DeselectLiquid(null);
+
+            capsuleSlot.ShowSelectButton();
+            jarSlot.ShowSelectButton();
+            liquidSlot.ShowSelectButton();
         }
 
         public void Play()

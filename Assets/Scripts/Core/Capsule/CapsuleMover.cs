@@ -70,6 +70,7 @@ namespace Core
 
         private void OnDisable()
         {
+            inputActions.Disable();
             inputActions.Player.Move.performed -= HandleMove;
             inputActions.Player.Move.canceled -= HandleMove;
         }

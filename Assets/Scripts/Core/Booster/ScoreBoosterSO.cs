@@ -14,7 +14,6 @@ namespace Core
 
         public override void Activate()
         {
-            Debug.Log("Event invoked");
             IngameEvents.ScoreBoosterGained.Invoke(this);
         }
     }

@@ -2,6 +2,7 @@ using Common.Saving.Flexible;
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core
 {
@@ -38,6 +39,15 @@ namespace Core
                 FlexibleSaveSystem.CreateProfile(profileName);
             }
             FlexibleSaveSystem.ChangeProfile(profileName);
+            if (PlayerPrefs.GetInt("tutorial opened",-1) != -1)
+            {
+                SceneManager.LoadScene("LoadingScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("TutorialScene");
+                PlayerPrefs.SetInt("tutorial opened", 1);
+            }
         }
 
         public void DeleteProfile()

@@ -80,9 +80,12 @@ namespace Common
         }
         public AmplifierSystem(IEnumerable<Stat> stats, IEnumerable<double> values)
         {
-            for (int i = 0; i < stats.Count(); i++)
+            var statList = stats.ToList();
+            var valueList = values.ToList();
+
+            for (int i = 0; i < statList.Count; i++)
             {
-                statDatas.TryAdd(stats.ElementAt(i), new(values.ElementAt(i)));
+                statDatas.TryAdd(statList[i], new(valueList[i]));
             }
         }
 
@@ -206,14 +209,14 @@ namespace Common
         public bool TryGetBuffedAttributeValue(Stat stat, out double value)
         {
             AmplifierValues addedValues = new(0);
-            foreach (var otherSystems in otherAmplifierSystems)
-            {
-                var statData = otherSystems.GetStatDatas();
-                if (statData.TryGetValue(stat, out AmplifierValues ampValues))
-                {
-                    addedValues = ampValues.Add(addedValues);
-                }
-            }
+            //foreach (var otherSystems in otherAmplifierSystems)
+            //{
+            //    var statData = otherSystems.GetStatDatas();
+            //    if (statData.TryGetValue(stat, out AmplifierValues ampValues))
+            //    {
+            //        addedValues = ampValues.Add(addedValues);
+            //    }
+            //}
             if (statDatas.TryGetValue(stat, out AmplifierValues values))
             {
                 addedValues = addedValues.Add(values);

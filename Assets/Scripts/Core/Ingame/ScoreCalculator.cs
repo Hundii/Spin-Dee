@@ -22,6 +22,8 @@ namespace Core
 
         private List<ScoreBoosterSO> scoreBoosters = new();
 
+        private RoundHandler roundHandler;
+
         private void OnEnable()
         {
             IngameEvents.MicrobeKilledByPlayer += HandleMicrobeKilled;
@@ -29,6 +31,11 @@ namespace Core
             IngameEvents.MoleculeMaterialHarvestedByPlayer += HandleMaterialHarvestedByPlayer;
             IngameEvents.ScoreBoosterGained += HandleScoreBoosterActivated;
             IngameEvents.RoundEnded += HandleRoundEnded;
+        }
+
+        private void Start()
+        {
+            roundHandler = this.Inject<RoundHandler>();
         }
 
         private void HandleMicrobeKilled(Microbe microbe)
@@ -48,16 +55,13 @@ namespace Core
 
         public float GetScoreRequirement()
         {
-            return 0f;
+            return 100f;
         }
 
         public void HandleScoreBoosterActivated(ScoreBoosterSO scoreBoosterSO)
         {
             scoreBoosters.Add(scoreBoosterSO);
-            Debug.Log(CurrentScore);
             CurrentScore += scoreBoosterSO.scoreAmount;
-            Debug.Log(scoreBoosterSO.scoreAmount);
-            Debug.Log(CurrentScore);
         }
 
         private void HandleRoundEnded()
@@ -67,7 +71,15 @@ namespace Core
                 IngameEvents.RoundLost.Invoke();
                 return;
             }
-            IngameEvents.RoundWon.Invoke();
+            CurrentScore = 0f;
+            if (roundHandler.CurrentRound >= roundHandler.GetMaxRound())
+            {
+                IngameEvents.GameWon.Invoke();
+            }
+            else
+            {
+                IngameEvents.RoundWon.Invoke();
+            }
         }
 
         private void OnDisable()

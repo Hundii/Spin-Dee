@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa695216341d1f94b9e20e6464412c83, type: 3}
   m_Name: SceneLoadingHelper
   m_EditorClassIdentifier: Common::Common.SceneLoadHelper
-  SceneToLoadAfterLoadingScene: MainMenuScene
-  EditorSceneToLoadAfterLoadingScene: GameScene
+  SceneToLoadAfterLoadingScene: GameSelectionScene
+  EditorSceneToLoadAfterLoadingScene: GameSelectionScene
   loadScene: 1
