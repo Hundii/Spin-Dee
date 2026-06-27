@@ -13,6 +13,8 @@ namespace Core
         private float damage;
         private float currentCooldown;
 
+        private float attackSpeed;
+
         public GameEvent<CapsuleWeapon> WeaponHit { get; private set; } = new();
 
         private void Start()
@@ -29,7 +31,7 @@ namespace Core
 
         private void Update()
         {
-            currentCooldown -= Time.deltaTime;
+            currentCooldown -= (Time.deltaTime * attackSpeed);
             if (currentCooldown <= 0f)
             {
                 currentCooldown = 0f;
@@ -56,6 +58,8 @@ namespace Core
         {
             statsHandler.TryGetAttributeValue(statSOContainer.damage, out var damage);
             this.damage = (float)damage;
+            statsHandler.TryGetAttributeValue(statSOContainer.attackSpeed, out var attackSpeed);
+            this.attackSpeed = (float)attackSpeed;
         }
 
         public void ResetCooldown()

@@ -23,11 +23,13 @@ MonoBehaviour:
   - stat: {fileID: 11400000, guid: 58818d84ad0280043aa684718507ddef, type: 2}
     value: 2
   - stat: {fileID: 11400000, guid: 6275dd897caba774ea041a54c291c4a4, type: 2}
-    value: 3
+    value: 3.3
   - stat: {fileID: 11400000, guid: ced09d1380c8e5d4c8859f823158f7c0, type: 2}
-    value: 6
+    value: 6.6
   - stat: {fileID: 11400000, guid: c39e6d623d6141944af0b1211394bf44, type: 2}
     value: 360
+  - stat: {fileID: 11400000, guid: b8029ac74f50fb84d83358d742549f49, type: 2}
+    value: 1.5
   harvesterStatsSO: {fileID: 11400000, guid: 3f8e7fdd6dbb8584d9a04f44e0918366, type: 2}
   decription: This Capsule is not meant to be used. It is too overpowered.
   isStarter: 0

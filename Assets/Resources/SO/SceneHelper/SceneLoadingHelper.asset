@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SceneLoadingHelper
   m_EditorClassIdentifier: Common::Common.SceneLoadHelper
   SceneToLoadAfterLoadingScene: GameSelectionScene
-  EditorSceneToLoadAfterLoadingScene: GameScene
+  EditorSceneToLoadAfterLoadingScene: GameSelectionScene
   loadScene: 1

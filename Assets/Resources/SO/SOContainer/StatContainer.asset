@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StatContainer
   m_EditorClassIdentifier: Core::Core.Generated.StatSOContainer
   statArray:
+  - {fileID: 11400000, guid: b8029ac74f50fb84d83358d742549f49, type: 2}
   - {fileID: 11400000, guid: b057b35bfecbae545b452a7d2fdb97d9, type: 2}
   - {fileID: 11400000, guid: 6bd8806880267f44f841dafb883714b6, type: 2}
   - {fileID: 11400000, guid: 58818d84ad0280043aa684718507ddef, type: 2}
@@ -27,6 +28,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 05f41f6125cb3c44bb5454232de55ac6, type: 2}
   - {fileID: 11400000, guid: 98ef9b887efb79646a8d51bc08446854, type: 2}
   - {fileID: 11400000, guid: c39e6d623d6141944af0b1211394bf44, type: 2}
+  attackSpeed: {fileID: 11400000, guid: b8029ac74f50fb84d83358d742549f49, type: 2}
   damage: {fileID: 11400000, guid: b057b35bfecbae545b452a7d2fdb97d9, type: 2}
   dropRate: {fileID: 11400000, guid: 6bd8806880267f44f841dafb883714b6, type: 2}
   harvestAmount: {fileID: 11400000, guid: 58818d84ad0280043aa684718507ddef, type: 2}

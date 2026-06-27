@@ -6,11 +6,19 @@ namespace Core
     {
         private Transform cam;
         private Vector3 localOffset;
+        private MeshRenderer meshRenderer;
 
         private void Start()
         {
             cam = Camera.main.transform;
             localOffset = transform.localPosition;
+            TryGetComponent(out meshRenderer);
+
+            if (meshRenderer != null)
+            {
+                meshRenderer.sortingLayerName = "UI";
+                meshRenderer.sortingOrder = 100;
+            }
         }
 
         private void LateUpdate()

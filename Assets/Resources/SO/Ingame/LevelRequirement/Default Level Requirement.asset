@@ -14,15 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Core::Core.IngameLevelRequirementSO
   <PresetValues>k__BackingField:
   - 25
-  - 60
-  - 120
-  - 200
-  - 300
+  - 50
+  - 85
+  - 130
+  - 180
+  - 250
+  - 330
   - 400
-  - 500
+  - 480
+  - 560
+  - 650
   - 750
+  - 880
   - 1000
   - 1250
   - 1500
   - 2000
   - 2500
+  - 3500
+  - 4000

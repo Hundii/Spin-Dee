@@ -51,6 +51,10 @@ namespace Core
                         roundTimeText.color = scoreIsNotEnoughColor;
                     }
                 }
+                else
+                {
+                    roundTimeText.color = Color.white;
+                }
                 
                 yield return wait;
             }

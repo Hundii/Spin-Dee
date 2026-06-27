@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9cf72513d6ea1488ca9c4be9fb7a2e, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: Core::Core.HarvesterStatsSO
-  baseHarvestCooldown: 1
-  baseCooldownMultiplierInside: 0.5
+  baseHarvestCooldown: 2
+  baseCooldownMultiplierInside: 0.75
   baseCooldownBonusAfterLeavingPercentage: 20
-  baseCooldownBonusAfterLeavingFlatAmount: 0.25
+  baseCooldownBonusAfterLeavingFlatAmount: 0.6
   baseHarvestAmount: 1

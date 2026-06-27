@@ -19,5 +19,5 @@ MonoBehaviour:
     stat: {fileID: 11400000, guid: c39e6d623d6141944af0b1211394bf44, type: 2}
     amplifierType: 1
     amplifierScope: 0
-    value: 20
+    value: 25
     stackCount: 999

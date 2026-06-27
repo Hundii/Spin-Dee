@@ -11,6 +11,7 @@ namespace Core.Generated
 public partial class StatSOContainer : GeneratedSOContainer
 {
 public Stat[] statArray;
+public Stat attackSpeed;
 public Stat damage;
 public Stat dropRate;
 public Stat harvestAmount;
@@ -29,6 +30,7 @@ public Stat spinSpeed;
 public override void FindReferences()
 {Stat[] objects = Resources.LoadAll<Stat>("");
 statArray = objects;
+attackSpeed = objects.Where(x=>x.name == "AttackSpeed").First();
 damage = objects.Where(x=>x.name == "Damage").First();
 dropRate = objects.Where(x=>x.name == "Drop Rate").First();
 harvestAmount = objects.Where(x=>x.name == "Harvest Amount").First();

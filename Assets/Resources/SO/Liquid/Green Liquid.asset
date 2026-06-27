@@ -24,7 +24,7 @@ MonoBehaviour:
   bossSpawnData:
   - microbe: {fileID: 11400000, guid: 22bab943f7b90154c994b9037117c4c7, type: 2}
     weight: 1
-  microbeSpawnChancePerSecond: 20
-  moleculeSpawnChancePerSecond: 20
+  microbeSpawnChancePerSecond: 30
+  moleculeSpawnChancePerSecond: 25
   description: Don't drink this. Influenza and Covid Virus live here.
   isStarter: 0

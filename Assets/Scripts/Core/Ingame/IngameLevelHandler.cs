@@ -31,6 +31,7 @@ namespace Core
 
         private void OnEnable()
         {
+            IngameEvents.MicrobeKilledByPlayer += HandleMicrobeKilledByPlayer;
             IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
         }
 
@@ -94,6 +95,7 @@ namespace Core
         private void OnDisable()
         {
             IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            IngameEvents.MicrobeKilledByPlayer -= HandleMicrobeKilledByPlayer;
         }
     }
 }

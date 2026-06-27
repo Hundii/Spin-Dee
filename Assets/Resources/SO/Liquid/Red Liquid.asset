@@ -25,6 +25,6 @@ MonoBehaviour:
   - microbe: {fileID: 11400000, guid: 22bab943f7b90154c994b9037117c4c7, type: 2}
     weight: 1
   microbeSpawnChancePerSecond: 30
-  moleculeSpawnChancePerSecond: 20
+  moleculeSpawnChancePerSecond: 25
   description: Viruses love this liquid. Perfect place to find HIV and Herpes.
   isStarter: 0
