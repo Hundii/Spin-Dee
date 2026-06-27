@@ -71,11 +71,17 @@ namespace Core
             effect.Play();
 
             DropLoot();
+            PlaySound();
 
             IngameEvents.MicrobeKilledByPlayer.Invoke(this);
 
             Destroy(effect.gameObject, effect.main.duration);
             Destroy(gameObject);
+        }
+
+        public void PlaySound()
+        {
+            this.Inject<AudioManager>().PlayPop();
         }
 
         public void DropLoot()

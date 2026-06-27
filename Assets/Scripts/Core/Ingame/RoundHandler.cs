@@ -9,6 +9,8 @@ namespace Core
         [SerializeField] private float bossRoundSeconds;
 
         private JarSO jarSO;
+        private AudioManager audioManager;
+
         private bool isPaused;
         public int CurrentRound { get; private set; } = 1;
         public bool IsCurrentRoundBossRound { get; private set; }
@@ -23,6 +25,12 @@ namespace Core
         private void OnEnable()
         {
             IngameEvents.RoundContinuedByPlayer += HandleRoundContinuedByPlayer;
+        }
+
+        private void Start()
+        {
+            audioManager = this.Inject<AudioManager>();
+            PlayMusicBasedOnRoundType();
         }
 
         private void Update()
@@ -74,7 +82,18 @@ namespace Core
 
         public void HandleRoundContinuedByPlayer()
         {
+            PlayMusicBasedOnRoundType();
             IngameEvents.RoundStarted.Invoke(CurrentRound);
+        }
+
+        public void PlayMusicBasedOnRoundType()
+        {
+            if (IsCurrentRoundBossRound)
+            {
+                audioManager.PlayBossMusic();
+                return;
+            }
+            audioManager.PlayNormalMusic();
         }
 
         public void Pause()
