@@ -27,8 +27,9 @@ namespace Core
             IngameEvents.RoundEnded += HandleRoundEnded;
             IngameEvents.RoundStarted += HandleRoundStarted;
         }
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             jar = GetComponent<Jar>();
             statSOContainer = SOContainerContainer.StatSOContainer;
             roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();

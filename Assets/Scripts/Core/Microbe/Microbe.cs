@@ -87,5 +87,19 @@ namespace Core
                 data.drop.Activate(data.amount);
             }
         }
+
+        public MicrobeSO GetMicrobeSO()
+        {
+            return microbeSO;
+        }
+
+        public float GetExperiencePointsWorth()
+        {
+            if (statsHandler.TryGetAttributeValue(SOContainerContainer.StatSOContainer.pointWorth, out var value))
+            {
+                return (float)value;
+            }
+            return 0f;
+        }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Basic Microbe
   m_EditorClassIdentifier: Core::Core.HarvesterStatsSO
   baseHarvestCooldown: 1
-  baseCooldownMultiplierInside: 0.33
+  baseCooldownMultiplierInside: 0.5
   baseCooldownBonusAfterLeavingPercentage: 10
   baseCooldownBonusAfterLeavingFlatAmount: 0.1
   baseHarvestAmount: 1

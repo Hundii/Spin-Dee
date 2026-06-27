@@ -8,6 +8,7 @@ namespace Core
     {
         public Molecule prefab;
         public Color[] moleculeColors;
-        public float amount;
+        public float minAmount;
+        public float maxAmount;
     }
 }

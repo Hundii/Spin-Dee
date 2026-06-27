@@ -40,17 +40,17 @@ namespace Core
 
         private void HandleMicrobeKilled(Microbe microbe)
         {
-            CurrentScore += 10f;
+            CurrentScore += microbe.GetExperiencePointsWorth();
         }
 
         private void HandleMaterialHarvestedByPlayer(float amount)
         {
-            CurrentScore += 1f;
+            CurrentScore += amount;
         }
 
         private void HandleMaterialHarvestedByMicrobe(float amount)
         {
-            CurrentScore -= 2f;
+            CurrentScore -= 2f * amount;
         }
 
         public float GetScoreRequirement()

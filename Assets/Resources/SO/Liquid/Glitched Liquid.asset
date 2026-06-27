@@ -28,7 +28,7 @@ MonoBehaviour:
   bossSpawnData:
   - microbe: {fileID: 11400000, guid: 22bab943f7b90154c994b9037117c4c7, type: 2}
     weight: 1
-  microbeSpawnChancePerSecond: 18
-  moleculeSpawnChancePerSecond: 10
+  microbeSpawnChancePerSecond: 50
+  moleculeSpawnChancePerSecond: 40
   description: This liquid is glitched. Anything can show up here
   isStarter: 0

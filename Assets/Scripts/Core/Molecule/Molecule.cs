@@ -23,7 +23,7 @@ namespace Core
         public void Init(MoleculeSO moleculeSO)
         {
             this.moleculeSO = moleculeSO;
-            amount = moleculeSO.amount;
+            amount = (int)Random.Range(moleculeSO.minAmount,moleculeSO.maxAmount);
             childMeshes = GetComponentsInChildren<MeshRenderer>().ToList();
             foreach (var child in childMeshes)
             {

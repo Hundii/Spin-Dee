@@ -3,15 +3,23 @@ using UnityEngine;
 
 namespace Core
 {
+    [RequireComponent(typeof(Microbe))]
     public class MicrobeReproduction : MonoBehaviour
     {
         private MicrobeSpawner microbeSpawner;
         private Harvester harvester;
+        private Microbe microbe;
+        private StatsHandler statsHandler;
 
         float currentMaterials = 0f;
-        float thresholdToReproduce = 10f;
+        float thresholdToReproduce;
         private void Start()
         {
+            microbe = GetComponent<Microbe>();
+            statsHandler = microbe.GetStatsHandler();
+            statsHandler.valueChanged += HandleStatChanged;
+            HandleStatChanged();
+
             harvester = GetComponentInChildren<Harvester>();
             harvester.MaterialHarvested.RegisterListener(HandleMaterialHarvested);
 
@@ -28,10 +36,15 @@ namespace Core
             }
         }
 
+        private void HandleStatChanged()
+        {
+            statsHandler.TryGetAttributeValue(SOContainerContainer.StatSOContainer.reproductionThreshold, out var value);
+            thresholdToReproduce = (float)value;
+        }
+
         public void Reproduce()
         {
-            microbeSpawner.SpawnMicrobe(transform.position,gameObject);
-            Debug.Log($"Reproduced {name}");
+            microbeSpawner.SpawnMicrobe(transform.position,microbe.GetMicrobeSO().prefab);
         }
     }
 }

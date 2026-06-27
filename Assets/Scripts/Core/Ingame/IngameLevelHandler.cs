@@ -10,7 +10,21 @@ namespace Core
 
         private BoosterSlotMachine boosterSlotMachine;
 
-        private float experience;
+        private float _experience;
+        public float Experience
+        {
+            get { return _experience; }
+            private set
+            {
+                var before = _experience;
+                _experience = value;
+                IngameEvents.ExperienceEarned.Invoke(before - value);
+                if (Experience >= GetLevelUpRequirement())
+                {
+                    LevelUp();
+                }
+            }
+        }
         private int level;
 
         private float previousTimeScale;
@@ -32,14 +46,13 @@ namespace Core
 
         public void HandleMoleculeMaterialHarvestedByPlayer(float amount)
         {
-            float experienceAmount = 1;
-            experience += experienceAmount;
-            IngameEvents.ExperienceEarned.Invoke(experienceAmount);
-
-            if (experience >= GetLevelUpRequirement())
-            {
-                LevelUp();
-            }
+            float experienceAmount = amount;
+            Experience += experienceAmount;
+        }
+        public void HandleMicrobeKilledByPlayer(Microbe microbe)
+        {
+            float experienceAmount = microbe.GetExperiencePointsWorth();
+            Experience += experienceAmount;
         }
 
         public int GetCurrentLevel()
@@ -54,7 +67,7 @@ namespace Core
 
         public float GetCurrentExperience()
         {
-            return experience;
+            return Experience;
         }
 
         public void LevelUp()

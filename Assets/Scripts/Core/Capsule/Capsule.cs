@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class Capsule : MonoBehaviour, IStatsHandlerHolder, IHarvesterStatsHolder
+    public class Capsule : MonoBehaviour, IStatsHandlerHolder, IHarvesterStatsHolder, INonPersistentManager
     {
         [SerializeField] private MeshRenderer meshRenderer;
         private CapsuleSO capsuleStatsSO;
