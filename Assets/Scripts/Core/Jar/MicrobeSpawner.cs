@@ -121,7 +121,8 @@ namespace Core
             var wait = new WaitForSeconds(1 / spawnTriesPerSecond);
             while (true)
             {
-                if (Random.Range(0f, 1f) <= (spawnChancePerSecond / (100 * spawnTriesPerSecond)))
+                float bossDivider = roundHandler.IsCurrentRoundBossRound ? 2 : 1;
+                if (Random.Range(0f, 1f) <= (spawnChancePerSecond / bossDivider / (100 * spawnTriesPerSecond)))
                 {
                     SpawnMicrobe();
                 }
