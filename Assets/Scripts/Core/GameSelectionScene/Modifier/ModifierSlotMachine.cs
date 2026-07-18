@@ -25,7 +25,7 @@ namespace Core
 
             foreach (var slot in slots)
             {
-                slot.UserSelectedSlot.RegisterListener(HandleSlotSelected);
+                slot.UserSelectedSlot.RegisterListener(new(HandleSlotSelected));
             }
 
             boosterSOContainer = SOContainerContainer.BoosterSOContainer;

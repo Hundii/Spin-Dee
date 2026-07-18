@@ -9,6 +9,8 @@ namespace Core
         [SerializeField] private TextMeshProUGUI moleculeMaterialText;
 
         private IngameInventory ingameInventory;
+
+        private SubscriptionList subscriptions = new();
         private void Start()
         {
             ingameInventory = this.Inject<IngameInventory>();
@@ -17,7 +19,7 @@ namespace Core
 
         private void OnEnable()
         {
-            IngameEvents.PlayerMoleculeMaterialChanged.RegisterListener(HandleMoleculeMaterialChanged);
+            IngameEvents.PlayerMoleculeMaterialChanged.RegisterListener(new(HandleMoleculeMaterialChanged));
         }
 
         public void HandleMoleculeMaterialChanged()
@@ -26,8 +28,7 @@ namespace Core
         }
         private void OnDisable()
         {
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialChanged);
-
+            subscriptions.UnsubscribeAll();
         }
     }
 }

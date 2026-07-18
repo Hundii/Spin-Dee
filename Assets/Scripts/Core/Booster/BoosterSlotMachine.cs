@@ -29,13 +29,16 @@ namespace Core
 
         public GameEvent SelectionFinished { get; private set; } = new();
 
+        private SubscriptionList subscriptions = new();
+
         private void Awake()
         {
+            DIContainer.RegisterAsNonPersistent(this);
             slots = GetComponentsInChildren<SlotMachineSlot>(true);
 
             foreach (var slot in slots)
             {
-                slot.UserSelectedSlot.RegisterListener(HandleSlotSelected);
+                slot.UserSelectedSlot.RegisterListener(new(HandleSlotSelected));
             }
 
             boosterSOContainer = SOContainerContainer.BoosterSOContainer;
@@ -43,7 +46,7 @@ namespace Core
 
         private void OnEnable()
         {
-            IngameEvents.PlayerMoleculeMaterialChanged += EnableDisableSpinButton;
+            subscriptions.Add(IngameEvents.PlayerMoleculeMaterialChanged.RegisterListener(new(EnableDisableSpinButton)));
         }
 
         private void Start()
@@ -96,7 +99,7 @@ namespace Core
             foreach (var slot in slots)
             {
                 slot.Spin();
-                slot.SpinEnded.RegisterOneTimeListener(HandleSpinEnded);
+                slot.SpinEnded.RegisterListener(new(HandleSpinEnded,true));
             }
             respinButton.interactable = false;
             respinCostText.text = currentRespinCost.AsRoundStr(1);
@@ -135,7 +138,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.PlayerMoleculeMaterialChanged -= EnableDisableSpinButton;
+            subscriptions.UnsubscribeAll();
         }
     }
 }

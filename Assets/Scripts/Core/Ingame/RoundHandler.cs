@@ -16,6 +16,7 @@ namespace Core
         public bool IsCurrentRoundBossRound { get; private set; }
         public float CurrentRoundTime { get; private set; }
 
+        private SubscriptionList subscriptions = new();
         private void Awake()
         {
             var sceneData = this.Inject<SharedDataService>().GetData<GameSelectionSceneData>(false);
@@ -24,7 +25,7 @@ namespace Core
 
         private void OnEnable()
         {
-            IngameEvents.RoundContinuedByPlayer += HandleRoundContinuedByPlayer;
+           subscriptions.Add(IngameEvents.RoundContinuedByPlayer.RegisterListener(new(HandleRoundContinuedByPlayer)));
         }
 
         private void Start()
@@ -108,7 +109,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.RoundContinuedByPlayer -= HandleRoundContinuedByPlayer;
+            subscriptions.UnsubscribeAll();
         }
     }
 }

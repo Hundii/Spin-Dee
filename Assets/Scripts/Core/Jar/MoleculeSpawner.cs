@@ -6,13 +6,12 @@ using UnityEngine;
 
 namespace Core
 {
-    [RequireComponent(typeof(Jar))]
     public class MoleculeSpawner : GenericSpawner, INonPersistentManager
     {
         [SerializeField] private Transform spawnedObjectsParent;
         [SerializeField] private MoleculeSO moleculeSO;
+        [SerializeField] private Jar jar;
 
-        private Jar jar;
 
         private StatSOContainer statSOContainer;
         private StatsHandler statsHandler;
@@ -22,15 +21,15 @@ namespace Core
 
         private float spawnChancePerSecond;
 
+        private SubscriptionList subscriptionList = new();
         private void OnEnable()
         {
-            IngameEvents.RoundEnded += HandleRoundEnded;
-            IngameEvents.RoundStarted += HandleRoundStarted;
+            subscriptionList.Add(IngameEvents.RoundEnded.RegisterListener(new(HandleRoundEnded)));
+            subscriptionList.Add(IngameEvents.RoundStarted.RegisterListener(new(HandleRoundStarted)));
         }
         protected override void Start()
         {
             base.Start();
-            jar = GetComponent<Jar>();
             statSOContainer = SOContainerContainer.StatSOContainer;
             roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
 
@@ -97,8 +96,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.RoundEnded -= HandleRoundEnded;
-            IngameEvents.RoundStarted -= HandleRoundStarted;
+            subscriptionList.UnsubscribeAll();
         }
     }
 }

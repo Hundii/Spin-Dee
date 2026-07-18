@@ -6,15 +6,15 @@ using UnityEngine;
 
 namespace Common
 {
-    public class LocalPrefs : MonoBehaviour, ILoadingSceneEntity
+    public class LocalPrefs : MonoBehaviour, ILoadingSceneEntity, IPersistentManager
     {
         private Dictionary<string, string> storage;
 
-        private Action<UnityEngine.Object> _onReady;
+        private Action<ILoadingSceneEntity> _onReady;
 
         private bool initialized = false;
 
-        void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+        void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
         {
             _onReady = onReady;
         }

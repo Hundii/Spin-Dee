@@ -357,7 +357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f099817875b48914091d41ea679589dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Common::Common.DIContainer
-  sceneLoadHelper: {fileID: 11400000, guid: c0ef9562345e5d24b97341f9bfef49bc, type: 2}
 --- !u!4 &163338814
 Transform:
   m_ObjectHideFlags: 0
@@ -393,6 +392,52 @@ MonoBehaviour:
   debugGroupFlags: -1
   warningGroupFlags: -1
   errorGroupFlags: -1
+--- !u!1 &365183688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 365183690}
+  - component: {fileID: 365183689}
+  m_Layer: 0
+  m_Name: LoadingSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &365183689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365183688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ed2fe71e410864a8d54b838c5918b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Common::Common.LoadingSceneManager
+  loadingSceneName: LoadingScene
+  sceneLoadHelper: {fileID: 11400000, guid: c0ef9562345e5d24b97341f9bfef49bc, type: 2}
+--- !u!4 &365183690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365183688}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 310.45142, y: 289.3465, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &485890595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1301,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 2046400595}
   - {fileID: 1715294130}
+  - {fileID: 365183690}
   - {fileID: 163338814}
   - {fileID: 1786957739}
   - {fileID: 114341797}

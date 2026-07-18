@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace Common
 {
-    public class SharedDataService : MonoBehaviour, ILoadingSceneEntity
+    public class SharedDataService : MonoBehaviour, ILoadingSceneEntity, IPersistentManager
     {
         public object Data { get; private set; }
-        private Action<UnityEngine.Object> _onReady;
+        private Action<ILoadingSceneEntity> _onReady;
 
-        void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+        void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
         {
             _onReady = onReady;
         }

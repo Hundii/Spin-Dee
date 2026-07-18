@@ -8,9 +8,11 @@ namespace Core
     {
         [SerializeField] private TextMeshPro levelText;
 
+        private SubscriptionList subscriptions = new();
+
         private void OnEnable()
         {
-            IngameEvents.LeveledUp.RegisterListener(UpdateLevelDisplay);
+           subscriptions.Add(IngameEvents.LeveledUp.RegisterListener(new(UpdateLevelDisplay)));
         }
 
         private void Start()
@@ -25,7 +27,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.LeveledUp.UnRegisterListener(UpdateLevelDisplay);
+            subscriptions.UnsubscribeAll();
         }
     }
 }

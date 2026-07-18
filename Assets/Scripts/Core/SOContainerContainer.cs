@@ -3,9 +3,9 @@ using Core.Generated;
 using System;
 using UnityEngine;
 
-public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
+public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity, IPersistentManager
 {
-    private Action<UnityEngine.Object> _onReady;
+    private Action<ILoadingSceneEntity> _onReady;
 
     [SerializeField] private IngameLevelRequirementSOContainer ingameLevelRequirementSOContainer;
     public static IngameLevelRequirementSOContainer IngameLevelRequirementSOContainer { get; set; }
@@ -40,7 +40,7 @@ public class SOContainerContainer : MonoBehaviour, ILoadingSceneEntity
     [SerializeField] private JarSOContainer jarSOContainer;
     public static JarSOContainer JarSOContainer { get; set; }
 
-    void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+    void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
     {
         _onReady = onReady;
     }

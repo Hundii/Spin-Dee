@@ -13,9 +13,11 @@ namespace Core
         public Amplifier CurrentMicrobeSpawnRate { get; private set; }
         public Amplifier CurrentMoleculeSpawnRate { get; private set; }
 
+        private SubscriptionList subscriptions = new();
+
         private void OnEnable()
         {
-            IngameEvents.RoundEnded += RampUpAmplifiers;
+           subscriptions.Add(IngameEvents.RoundEnded.RegisterListener(new(RampUpAmplifiers)));
         }
 
         public void RampUpAmplifiers(int round)
@@ -38,7 +40,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.RoundEnded -= RampUpAmplifiers;
+            subscriptions.UnsubscribeAll();
         }
     }
 }

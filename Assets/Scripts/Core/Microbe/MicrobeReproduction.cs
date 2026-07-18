@@ -21,7 +21,7 @@ namespace Core
             HandleStatChanged();
 
             harvester = GetComponentInChildren<Harvester>();
-            harvester.MaterialHarvested.RegisterListener(HandleMaterialHarvested);
+            harvester.MaterialHarvested.RegisterListener(new(HandleMaterialHarvested));
 
             microbeSpawner = this.Inject<MicrobeSpawner>();
         }

@@ -29,10 +29,11 @@ namespace Core
 
         private float previousTimeScale;
 
+        private SubscriptionList subscriptions = new();
         private void OnEnable()
         {
-            IngameEvents.MicrobeKilledByPlayer += HandleMicrobeKilledByPlayer;
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            subscriptions.Add(IngameEvents.MicrobeKilledByPlayer.RegisterListener(new(HandleMicrobeKilledByPlayer)));
+            subscriptions.Add(IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(new(HandleMoleculeMaterialHarvestedByPlayer)));
         }
 
         private void Awake()
@@ -83,7 +84,7 @@ namespace Core
         private void OpenBoosterSlotMachine()
         {
             boosterSlotMachine.Open();
-            boosterSlotMachine.SelectionFinished.RegisterOneTimeListener(HandleBoosterSelectionFinished);
+            boosterSlotMachine.SelectionFinished.RegisterListener(new(HandleBoosterSelectionFinished,true));
             Time.timeScale = 0f;
         }
 
@@ -94,8 +95,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
-            IngameEvents.MicrobeKilledByPlayer -= HandleMicrobeKilledByPlayer;
+            subscriptions.UnsubscribeAll();
         }
     }
 }

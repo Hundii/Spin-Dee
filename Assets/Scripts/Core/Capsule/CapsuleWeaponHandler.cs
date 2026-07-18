@@ -1,3 +1,4 @@
+using Common;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,13 +9,15 @@ namespace Core
     {
         private List<CapsuleWeapon> weapons;
 
+        private SubscriptionList subscriptions = new();
+
         private void Start()
         {
             weapons = GetComponentsInChildren<CapsuleWeapon>().ToList();
 
             foreach (var weapon in weapons)
             {
-                weapon.WeaponHit.RegisterListener(HandleWeaponHit);
+                subscriptions.Add(weapon.WeaponHit.RegisterListener(new(HandleWeaponHit)));
             }
         }
 
@@ -27,6 +30,11 @@ namespace Core
                     weapon.ResetCooldown();
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            subscriptions.UnsubscribeAll();
         }
     }
 }

@@ -1,80 +1,54 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Common
 {
     public class GameEvent
     {
-        private Action onEventInvoked;
-        private Action onEventParameterlessInvokedOneTime;
+        private List<ActionWithMetadata<object>> callbacks = new();
 
-        public bool HasBeenInvoked { get; private set; }
+        public bool HasBeenInvoked { get; private set; } = false;
 
-        public void RegisterListener(Action callback, bool callImmediatelyIfHasBeenInvoked = false)
+        public IDisposable RegisterListener(ActionWithMetadata<object> callback)
         {
-            onEventInvoked += callback;
-            if (callImmediatelyIfHasBeenInvoked && HasBeenInvoked)
-            {
-                callback?.Invoke();
-            }
+            callbacks.Add(callback);
+            callbacks = callbacks.OrderBy(x => x.order).ToList();
+            return new Subscription<object>(this, callback);
         }
-        public void RegisterOneTimeListener(Action callback)
+        public void UnRegisterListener(ActionWithMetadata<object> callback)
         {
-            onEventParameterlessInvokedOneTime += callback;
+            callbacks.Remove(callback);
         }
-        public void UnRegisterListener(Action callback)
-        {
-            onEventInvoked -= callback;
-        }
-        public void UnRegisterOneTimeListener(Action callback)
-        {
-            onEventParameterlessInvokedOneTime -= callback;
-        }
+
 
         public void Invoke()
         {
-            InvokeOneTimeListeners();
-            onEventInvoked?.Invoke();
             HasBeenInvoked = true;
-        }
 
-        private void InvokeOneTimeListeners()
-        {
-            onEventParameterlessInvokedOneTime?.Invoke();
-            onEventParameterlessInvokedOneTime = null;
+            foreach (var callback in callbacks)
+            {
+                callback.Invoke(null);
+            }
+
+            callbacks.RemoveAll(x => x.isDead);
         }
 
         public void Reset()
         {
             HasBeenInvoked = false;
+
             ResetListeners();
         }
-
         public void ResetListeners()
         {
-            onEventInvoked = null;
-            onEventParameterlessInvokedOneTime = null;
-        }
-
-        public static GameEvent operator +(GameEvent gameEvent, Action callback)
-        {
-            gameEvent.RegisterListener(callback);
-            return gameEvent;
-        }
-
-        public static GameEvent operator -(GameEvent gameEvent, Action callback)
-        {
-            gameEvent.UnRegisterListener(callback);
-            return gameEvent;
+            callbacks = new();
         }
     }
 
     public class GameEvent<T>
     {
-        private Action<T> onEventInvoked;
-        private Action onEventParameterlessInvoked;
-
-        private Action<T> onOneTimeEventInvoked;
-        private Action onOneTimeEventParameterlessInvoked;
+        private List<ActionWithMetadata<T>> callbacks = new();
 
         public T PreviousValue { get; private set; } = default;
         public bool HasPreviousValue { get; private set; }
@@ -82,47 +56,17 @@ namespace Common
         public T CurrentValue { get; private set; } = default;
         public bool HasCurrentValue { get; private set; }
 
-        public void RegisterListener(Action<T> callback, bool callImmediatelyIfHasValue = false)
+        public IDisposable RegisterListener(ActionWithMetadata<T> callback)
         {
-            onEventInvoked += callback;
-            if (callImmediatelyIfHasValue && HasCurrentValue)
-            {
-                callback.Invoke(CurrentValue);
-            }
+            callbacks.Add(callback);
+            callbacks = callbacks.OrderBy(x => x.order).ToList();
+            return new Subscription<T>(this, callback);
         }
-        public void RegisterListener(Action callback, bool callImmediatelyIfHasValue = false)
+        public void UnRegisterListener(ActionWithMetadata<T> callback)
         {
-            onEventParameterlessInvoked += callback;
-            if (callImmediatelyIfHasValue && HasCurrentValue)
-            {
-                callback.Invoke();
-            }
-        }
-        public void UnRegisterListener(Action<T> callback)
-        {
-            onEventInvoked -= callback;
-        }
-        public void UnRegisterListener(Action callback)
-        {
-            onEventParameterlessInvoked -= callback;
+            callbacks.Remove(callback);
         }
 
-        public void RegisterOneTimeListener(Action<T> callback)
-        {
-            onOneTimeEventInvoked += callback;
-        }
-        public void RegisterOneTimeListener(Action callback)
-        {
-            onOneTimeEventParameterlessInvoked += callback;
-        }
-        public void UnRegisterOneTimeListener(Action<T> callback)
-        {
-            onOneTimeEventInvoked -= callback;
-        }
-        public void UnRegisterOneTimeListener(Action callback)
-        {
-            onOneTimeEventParameterlessInvoked -= callback;
-        }
 
         public void Invoke(T value)
         {
@@ -131,19 +75,12 @@ namespace Common
             HasPreviousValue = HasCurrentValue;
             HasCurrentValue = true;
 
-            InvokeOneTimeListeners(value);
+            foreach (var callback in callbacks)
+            {
+                callback.Invoke(value);
+            }
 
-            onEventInvoked?.Invoke(value);
-            onEventParameterlessInvoked?.Invoke();
-        }
-
-        private void InvokeOneTimeListeners(T value)
-        {
-            onOneTimeEventInvoked?.Invoke(value);
-            onOneTimeEventParameterlessInvoked?.Invoke();
-
-            onOneTimeEventInvoked = null;
-            onOneTimeEventParameterlessInvoked = null;
+            callbacks.RemoveAll(x => x.isDead);
         }
 
         public void Reset()
@@ -157,35 +94,7 @@ namespace Common
         }
         public void ResetListeners()
         {
-            onEventInvoked = null;
-            onEventParameterlessInvoked = null;
-
-            onOneTimeEventInvoked = null;
-            onOneTimeEventParameterlessInvoked = null;
+            callbacks = new();
         }
-        public static GameEvent<T> operator +(GameEvent<T> gameEvent, Action<T> callback)
-        {
-            gameEvent.RegisterListener(callback);
-            return gameEvent;
-        }
-
-        public static GameEvent<T> operator -(GameEvent<T> gameEvent, Action<T> callback)
-        {
-            gameEvent.UnRegisterListener(callback);
-            return gameEvent;
-        }
-
-        public static GameEvent<T> operator +(GameEvent<T> gameEvent, Action callback)
-        {
-            gameEvent.RegisterListener(callback);
-            return gameEvent;
-        }
-
-        public static GameEvent<T> operator -(GameEvent<T> gameEvent, Action callback)
-        {
-            gameEvent.UnRegisterListener(callback);
-            return gameEvent;
-        }
-
     }
 }

@@ -15,7 +15,7 @@ namespace Core
         private void Start()
         {
             molecule = GetComponent<Molecule>();
-            molecule.MoleculeHarvested.RegisterListener(UpdateDisplay);
+            molecule.MoleculeHarvested.RegisterListener(new(UpdateDisplay));
             UpdateDisplay();
         }
 

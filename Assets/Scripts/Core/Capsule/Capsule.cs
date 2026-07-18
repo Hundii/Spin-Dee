@@ -13,9 +13,11 @@ namespace Core
         public StatsHandler StatsHandler { get; private set; }
 
         private List<StatBoosterSO> boosters = new();
+
+        private SubscriptionList subscriptions = new();
         private void OnEnable()
         {
-            IngameEvents.CapsuleBoosterGained += RegisterBooster;
+            subscriptions.Add(IngameEvents.CapsuleBoosterGained.RegisterListener(new(RegisterBooster)));
         }
 
         private void Awake()
@@ -25,6 +27,8 @@ namespace Core
             meshRenderer.material = capsuleStatsSO.capsuleMaterial;
 
             StatsHandler = new(new(capsuleStatsSO.stats.Select(x=>x.stat),capsuleStatsSO.stats.Select(x=>x.value)));
+
+            this.Inject<PlayerManager>().RegisterPlayer(this);
         }
 
         private void Start()
@@ -33,7 +37,7 @@ namespace Core
 
             foreach (var harvester in harvesters)
             {
-                harvester.MaterialHarvested.RegisterListener(HandleHarvestedMaterial);
+                harvester.MaterialHarvested.RegisterListener(new(HandleHarvestedMaterial));
             }
 
         }
@@ -62,7 +66,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.CapsuleBoosterGained -= RegisterBooster;
+            subscriptions.UnsubscribeAll();
         }
     }
 }

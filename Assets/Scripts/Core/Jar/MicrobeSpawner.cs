@@ -7,15 +7,14 @@ using UnityEngine;
 
 namespace Core
 {
-    [RequireComponent(typeof(Jar))]
     public class MicrobeSpawner : GenericSpawner, INonPersistentManager
     {
         [Header("References")]
         [SerializeField] private Transform spawnedObjectsParent;
+        [SerializeField] private Jar jar;
 
         private List<LiquidSpawnData> liquidSpawnData;
 
-        private Jar jar;
 
         private StatSOContainer statSOContainer;
         private StatsHandler statsHandler;
@@ -26,10 +25,11 @@ namespace Core
 
         private float spawnChancePerSecond;
 
+        private SubscriptionList subscriptionList = new();
         private void OnEnable()
         {
-            IngameEvents.RoundEnded += HandleRoundEnded;
-            IngameEvents.RoundStarted += HandleRoundStarted;
+            subscriptionList.Add(IngameEvents.RoundEnded.RegisterListener(new(HandleRoundEnded)));
+            subscriptionList.Add(IngameEvents.RoundStarted.RegisterListener(new(HandleRoundStarted)));
         }
 
         protected override void Start()
@@ -38,7 +38,6 @@ namespace Core
             statSOContainer = SOContainerContainer.StatSOContainer;
             roundHandler = this.Inject<RoundHandler>();
             roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
-            jar = GetComponent<Jar>();
             var liquidSO = jar.GetLiquidSO();
             liquidSpawnData = jar.GetLiquidSO().spawnData;
 
@@ -132,8 +131,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.RoundEnded -= HandleRoundEnded;
-            IngameEvents.RoundStarted -= HandleRoundStarted;
+            subscriptionList.UnsubscribeAll();
         }
     }
 }

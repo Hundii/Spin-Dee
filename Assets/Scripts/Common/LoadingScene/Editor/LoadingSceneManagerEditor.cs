@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Common.Editor
 {
-    [CustomEditor(typeof(DIContainer))]
-    public class DIContainerEditor : UnityEditor.Editor
+    [CustomEditor(typeof(LoadingSceneManager))]
+    public class LoadingSceneManagerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            var diContainer = (DIContainer)target;
+            var diContainer = (LoadingSceneManager)target;
             if (GUILayout.Button("Show not ready services"))
             {
                 var services = diContainer.GetNotReadyServices();

@@ -15,7 +15,7 @@ namespace Core
 
         protected virtual void Start()
         {
-            capsule = this.Inject<Capsule>().transform;
+            capsule = this.Inject<PlayerManager>().GetPlayer<Capsule>().transform;
         }
 
         protected Vector3 GetRandomPointInSpawnArea()

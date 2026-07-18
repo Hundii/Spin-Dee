@@ -19,10 +19,11 @@ namespace Core
         private RoundHandler roundHandler;
         private ScoreCalculator scoreCalculator;
 
+        private SubscriptionList subscriptions = new();
         private void OnEnable()
         {
-            IngameEvents.RoundEnded.RegisterListener(UpdateRoundText);
-            IngameEvents.RoundStarted.RegisterListener(UpdateRoundText);
+           subscriptions.Add(IngameEvents.RoundEnded.RegisterListener(new(UpdateRoundText)));
+           subscriptions.Add(IngameEvents.RoundStarted.RegisterListener(new(UpdateRoundText)));
         }
 
         private void Start()
@@ -69,8 +70,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.RoundEnded.UnRegisterListener(UpdateRoundText);
-            IngameEvents.RoundStarted.UnRegisterListener(UpdateRoundText);
+            subscriptions.UnsubscribeAll();
         }
 
     }

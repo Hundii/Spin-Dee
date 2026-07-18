@@ -14,7 +14,7 @@ namespace Core
         private void Start()
         {
             healthSystem = GetComponent<Microbe>().HealthSystem;
-            healthSystem.HealthChanged.RegisterListener(UpdateDisplay);
+            healthSystem.HealthChanged.RegisterListener(new(UpdateDisplay));
             UpdateDisplay();
         }
 

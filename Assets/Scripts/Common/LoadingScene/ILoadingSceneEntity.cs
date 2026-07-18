@@ -4,15 +4,15 @@ namespace Common
 {
     // Boilerplate to implementing classes:
     /* 
-    private Action<UnityEngine.Object> _onReady;
+    private Action<ILoadingSceneEntity> _onReady;
 
-    void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+    void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
     {
         _onReady = onReady;
     }
     */
     public interface ILoadingSceneEntity
     {
-        void OnCreation(Action<UnityEngine.Object> onReady);
+        void OnCreation(Action<ILoadingSceneEntity> onReady);
     }
 }

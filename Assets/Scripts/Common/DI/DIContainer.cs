@@ -2,93 +2,59 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Common
 {
+    [DefaultExecutionOrder(-100)]
     public class DIContainer : MonoBehaviour
     {
         public static DIContainer Instance;
 
-        [SerializeField] private SceneLoadHelper sceneLoadHelper;
         private readonly Dictionary<Type, object> services = new();
-        private readonly List<UnityEngine.Object> readyServicesList = new();
         private Dictionary<Type, object> nonPersistentServices = new();
+
         private void Awake()
         {
-            if (Instance != null)
+            if (Instance == null)
             {
-                Debug.LogWarning("Multiple DIContainers were found");
-                Destroy(Instance);
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            Instance.nonPersistentServices = new();
+            var services = Instance.services;
+            var nonPersistentServices = Instance.nonPersistentServices;
 
-            ILoadingSceneEntity[] entites = GetComponentsInChildren<ILoadingSceneEntity>();
+            IPersistentManager[] persistentManagers = GetComponentsInChildren<IPersistentManager>();
 
-            foreach (var entity in entites)
+            foreach (var entity in persistentManagers)
             {
                 Type entityType = entity.GetType();
                 if (!services.TryAdd(entityType, entity))
                 {
                     Debug.LogWarning($"Entity with type {entityType} already exists in services");
                 }
-                else
-                {
-                    entity.OnCreation(OnServiceIsReady);
-                }
             }
-        }
 
-        private void Start()
-        {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
+            INonPersistentManager[] nonPersistentManagers = GetComponentsInChildren<INonPersistentManager>();
 
-        public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            nonPersistentServices = new();
-            var managers = Utility.FindObjectsOfType<INonPersistentManager>();
-            foreach (var manager in managers)
+            foreach (var entity in nonPersistentManagers)
             {
-                var type = manager.GetType();
-                nonPersistentServices.Add(type, manager);
+                Type entityType = entity.GetType();
+                if (!nonPersistentServices.TryAdd(entityType, entity))
+                {
+                    Debug.LogWarning($"Entity with type {entityType} already exists in non psersistent services");
+                }
             }
         }
 
-        private void OnServiceIsReady(UnityEngine.Object obj)
+        public static void RegisterAsPersistent(IPersistentManager manager)
         {
-            readyServicesList.Add(obj);
-            if (readyServicesList.Count == services.Count)
-            {
-                Debug.Log("DI Container ready");
-                if (!sceneLoadHelper.loadScene)
-                {
-                    return;
-                }
-                var sceneToLoad = sceneLoadHelper.SceneToLoadAfterLoadingScene;
-#if UNITY_EDITOR
-                sceneToLoad = sceneLoadHelper.EditorSceneToLoadAfterLoadingScene;
-#endif
-                if (string.IsNullOrEmpty(sceneToLoad) || sceneToLoad == "LoadingScene")
-                {
-                    return;
-                }
-                SceneManager.LoadScene(sceneToLoad);
-            }
+            Instance.services.TryAdd(manager.GetType(),manager);
         }
 
-        public List<object> GetNotReadyServices()
+        public static void RegisterAsNonPersistent(INonPersistentManager manager)
         {
-            List<object> notReadyServices = new();
-            foreach (var service in readyServicesList)
-            {
-                if (!services.Values.Contains(service))
-                {
-                    notReadyServices.Add(service);
-                }
-            }
-            return notReadyServices;
+            Instance.nonPersistentServices.TryAdd(manager.GetType(), manager);
         }
 
         public T GetService<T>()
@@ -101,17 +67,25 @@ namespace Common
             {
                 return (T)nonPersistentManager;
             }
-            throw new Exception($"Service of type {typeof(T)} was not found in registered services");
+            return GetServiceByInterface<T>();
         }
 
         public T GetServiceByInterface<T>()
         {
-            var keys = services.Keys.ToList();
-            foreach (var key in keys)
+            var persistentKeys = services.Keys.ToList();
+            foreach (var key in persistentKeys)
             {
                 if (typeof(T).IsAssignableFrom(key))
                 {
                     return (T)services[key];
+                }
+            }
+            var nonPersistentKeys = services.Keys.ToList();
+            foreach (var key in nonPersistentKeys)
+            {
+                if (typeof(T).IsAssignableFrom(key))
+                {
+                    return (T)nonPersistentServices[key];
                 }
             }
             throw new Exception($"Service of type {typeof(T)} was not found in registered services");
@@ -123,15 +97,6 @@ namespace Common
                 return default;
             }
             return Instance.GetService<T>();
-        }
-
-        public static T InjectInterface<T>()
-        {
-            if (Instance == null)
-            {
-                return default;
-            }
-            return Instance.GetServiceByInterface<T>();
         }
     }
 }

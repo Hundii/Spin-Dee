@@ -30,7 +30,7 @@ namespace Core
             harvesters = GetComponentsInChildren<Harvester>();
             foreach (var harvester in harvesters)
             {
-                harvester.MaterialHarvested.RegisterListener(HandleMaterialHarvested);
+                harvester.MaterialHarvested.RegisterListener(new(HandleMaterialHarvested));
             }
         }
 
@@ -39,7 +39,7 @@ namespace Core
             var roundAmplifierHandler = this.Inject<RoundAmplifierHandler>();
             statsHandler.RegisterAmplifiers(roundAmplifierHandler.CurrentStrongerMicrobe);
             HealthSystem.Init(statsHandler);
-            HealthSystem.EntityDied.RegisterListener(HandleDeath);
+            HealthSystem.EntityDied.RegisterListener(new(HandleDeath));
         }
 
         private void HandleMaterialHarvested(float amount)

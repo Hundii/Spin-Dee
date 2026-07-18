@@ -29,11 +29,12 @@ namespace Core
 
         private float previousTimeScale;
 
+        private SubscriptionList subscriptionList = new();
         private void OnEnable()
         {
-            IngameEvents.RoundWon += HandleRoundWon;
-            IngameEvents.RoundLost += HandleRoundLost;
-            IngameEvents.GameWon += HandleGameWon;
+            subscriptionList.Add(IngameEvents.RoundWon.RegisterListener(new(HandleRoundWon)));
+            subscriptionList.Add(IngameEvents.RoundLost.RegisterListener(new(HandleRoundLost)));
+            subscriptionList.Add(IngameEvents.GameWon.RegisterListener(new(HandleGameWon)));
         }
 
         private void Start()
@@ -105,9 +106,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.RoundWon -= HandleRoundWon;
-            IngameEvents.RoundLost -= HandleRoundLost;
-            IngameEvents.GameWon -= HandleGameWon;
+            subscriptionList.UnsubscribeAll();
         }
     }
 }

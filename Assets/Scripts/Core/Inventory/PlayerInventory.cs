@@ -6,23 +6,25 @@ using UnityEngine;
 
 namespace Core
 {
-    public class PlayerInventory : MonoBehaviour, ILoadingSceneEntity
+    public class PlayerInventory : MonoBehaviour, ILoadingSceneEntity, IPersistentManager
     {
         public GenericStackingInventory StackingInventory { get; private set; } = new();
 
         public const string FileName = "Inventory";
 
-        public Action<UnityEngine.Object> _onReady;
+        public Action<ILoadingSceneEntity> _onReady;
 
-        void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+        void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
         {
             _onReady = onReady;
         }
 
+        private SubscriptionList subscriptionList = new();
+
         private void OnEnable()
         {
-            GlobalEvents.GameSaved.RegisterListener(Save);
-            GlobalEvents.GameLoaded.RegisterListener(Load);
+            subscriptionList.Add(GlobalEvents.GameSaved.RegisterListener(new(Save)));
+            subscriptionList.Add(GlobalEvents.GameLoaded.RegisterListener(new(Load)));
         }
 
         private void Start()
@@ -49,8 +51,7 @@ namespace Core
 
         private void OnDisable()
         {
-            GlobalEvents.GameSaved.UnRegisterListener(Save);
-            GlobalEvents.GameLoaded.UnRegisterListener(Load);
+            subscriptionList.UnsubscribeAll();
         }
     }
 }

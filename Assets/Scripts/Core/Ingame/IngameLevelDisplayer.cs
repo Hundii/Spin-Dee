@@ -11,9 +11,10 @@ namespace Core
 
         private IngameLevelHandler ingameLevelHandler;
 
+        private SubscriptionList subscriptions = new();
         private void OnEnable()
         {
-            IngameEvents.ExperienceEarned.RegisterListener(HandleExperienceEarned);
+            subscriptions.Add(IngameEvents.ExperienceEarned.RegisterListener(new(HandleExperienceEarned)));
         }
 
         private void Start()
@@ -36,7 +37,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.ExperienceEarned.UnRegisterListener(HandleExperienceEarned);
+            subscriptions.UnsubscribeAll();
         }
     }
 }

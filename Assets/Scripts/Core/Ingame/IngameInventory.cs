@@ -19,9 +19,11 @@ namespace Core
             }
         }
 
+        private SubscriptionList subscriptions = new();
+
         private void OnEnable()
         {
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            subscriptions.Add(IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(new(HandleMoleculeMaterialHarvestedByPlayer)));
         }
 
         public void HandleMoleculeMaterialHarvestedByPlayer(float amount)
@@ -41,7 +43,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.MoleculeMaterialHarvestedByPlayer.UnRegisterListener(HandleMoleculeMaterialHarvestedByPlayer);
+            subscriptions.UnsubscribeAll();
         }
     }
 }

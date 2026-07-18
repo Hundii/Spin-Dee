@@ -24,13 +24,15 @@ namespace Core
 
         private RoundHandler roundHandler;
 
+        private SubscriptionList subscriptionList = new();
+
         private void OnEnable()
         {
-            IngameEvents.MicrobeKilledByPlayer += HandleMicrobeKilled;
-            IngameEvents.MoleculeMaterialHarvestedByMicrobe += HandleMaterialHarvestedByMicrobe;
-            IngameEvents.MoleculeMaterialHarvestedByPlayer += HandleMaterialHarvestedByPlayer;
-            IngameEvents.ScoreBoosterGained += HandleScoreBoosterActivated;
-            IngameEvents.RoundEnded += HandleRoundEnded;
+            subscriptionList.Add(IngameEvents.MicrobeKilledByPlayer.RegisterListener(new(HandleMicrobeKilled)));
+            subscriptionList.Add(IngameEvents.MoleculeMaterialHarvestedByMicrobe.RegisterListener(new(HandleMaterialHarvestedByMicrobe)));
+            subscriptionList.Add(IngameEvents.MoleculeMaterialHarvestedByPlayer.RegisterListener(new(HandleMaterialHarvestedByPlayer)));
+            subscriptionList.Add(IngameEvents.ScoreBoosterGained.RegisterListener(new(HandleScoreBoosterActivated)));
+            subscriptionList.Add(IngameEvents.RoundEnded.RegisterListener(new(HandleRoundEnded)));
         }
 
         private void Start()
@@ -84,11 +86,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.MicrobeKilledByPlayer -= HandleMicrobeKilled;
-            IngameEvents.MoleculeMaterialHarvestedByMicrobe -= HandleMaterialHarvestedByMicrobe;
-            IngameEvents.MoleculeMaterialHarvestedByPlayer -= HandleMaterialHarvestedByPlayer;
-            IngameEvents.ScoreBoosterGained -= HandleScoreBoosterActivated;
-            IngameEvents.RoundEnded -= HandleRoundEnded;
+            subscriptionList.UnsubscribeAll();
         }
     }
 }

@@ -5,7 +5,7 @@ using Debug = UnityEngine.Debug;
 
 namespace Common
 {
-    public class CustomLogger : MonoBehaviour, ILoadingSceneEntity
+    public class CustomLogger : MonoBehaviour, ILoadingSceneEntity, IPersistentManager
     {
         private static CustomLogger instance;
         [SerializeField] private LogFlags logFlags = LogFlags.All;
@@ -13,10 +13,10 @@ namespace Common
         [SerializeField] private LogGroupFlags warningGroupFlags = LogGroupFlags.All;
         [SerializeField] private LogGroupFlags errorGroupFlags = LogGroupFlags.All;
 
-        private Action<UnityEngine.Object> _onReady;
+        private Action<ILoadingSceneEntity> _onReady;
         private Stopwatch stopwatch = new();
 
-        void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+        void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
         {
             _onReady = onReady;
         }

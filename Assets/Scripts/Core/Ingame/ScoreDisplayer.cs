@@ -10,9 +10,10 @@ namespace Core
 
         private ScoreCalculator scoreCalculator;
 
+        private SubscriptionList subscriptions = new();
         private void OnEnable()
         {
-            IngameEvents.ScoreChanged += UpdateScoreDisplay;
+            subscriptions.Add(IngameEvents.ScoreChanged.RegisterListener(new(UpdateScoreDisplay)));
         }
 
         private void Start()
@@ -28,7 +29,7 @@ namespace Core
 
         private void OnDisable()
         {
-            IngameEvents.ScoreChanged -= UpdateScoreDisplay;
+            subscriptions.UnsubscribeAll();
         }
     }
 }

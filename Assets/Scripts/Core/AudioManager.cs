@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Core
 {
-    public class AudioManager : MonoBehaviour, ILoadingSceneEntity
+    public class AudioManager : MonoBehaviour, ILoadingSceneEntity, IPersistentManager
     {
         [Header("Sources")]
         [SerializeField] private AudioSource musicSource;
@@ -15,9 +15,9 @@ namespace Core
         [SerializeField] private AudioClip bossMusic;
         [SerializeField] private AudioClip popSound;
 
-        private Action<UnityEngine.Object> _onReady;
+        private Action<ILoadingSceneEntity> _onReady;
 
-        void ILoadingSceneEntity.OnCreation(Action<UnityEngine.Object> onReady)
+        void ILoadingSceneEntity.OnCreation(Action<ILoadingSceneEntity> onReady)
         {
             _onReady = onReady;
         }
