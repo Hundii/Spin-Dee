@@ -1,67 +1,54 @@
 using Common;
+using System.Linq;
 using UnityEngine;
 
 namespace Core
 {
     public class Tester : MonoBehaviour
     {
-        public GameEvent<int> testEventWithInt = new();
-        public GameEvent testEventWithoutParam = new();
-
-        private SubscriptionList subscriptionList = new();
         private void Start()
         {
-            subscriptionList.Add(testEventWithInt.RegisterListener(new(TestMethodParameterlessLastOrder, 1)));
-            subscriptionList.Add(testEventWithInt.RegisterListener(new(TestMethod)));
-            subscriptionList.Add(testEventWithInt.RegisterListener(new(TestMethod,true)));
-            subscriptionList.Add(testEventWithInt.RegisterListener(new(TestMethodParameterless)));
-            subscriptionList.Add(testEventWithInt.RegisterListener(new(TestMethodParameterless,true)));
-            subscriptionList.Add(testEventWithInt.RegisterListener(new(TestMethodParameterlessFirstOrder,-1)));
+            Amplifier roundAmp = new() { 
+                amplifierScope = AmplifierScope.All, 
+                amplifierType = AmplifierType.AdditivePercentage, 
+                stat = SOContainerContainer.StatSOContainer.damage,
+                stackCount = 100000,
+                value = 10,
+                uniqueTag = "All Damage Buff"
+            };
+            Amplifier roundAmp2 = new()
+            {
+                amplifierScope = AmplifierScope.All,
+                amplifierType = AmplifierType.TruePercentage,
+                stat = SOContainerContainer.StatSOContainer.damage,
+                stackCount = 100000,
+                value = 10,
+                uniqueTag = "All Damage Buff2"
+            };
+            Amplifier roundAmp3 = new()
+            {
+                amplifierScope = AmplifierScope.All,
+                amplifierType = AmplifierType.Plus,
+                stat = SOContainerContainer.StatSOContainer.damage,
+                stackCount = 100000,
+                value = 1,
+                uniqueTag = "All Damage Buff3"
+            };
+            StatsHandler statsHandler = new(new());
+            statsHandler.RegisterAmplifiers(roundAmp);
+            statsHandler.RegisterAmplifiers(roundAmp);
+            statsHandler.RegisterAmplifiers(roundAmp2);
+            statsHandler.RegisterAmplifiers(roundAmp2);
+            statsHandler.RegisterAmplifiers(roundAmp3);
+            statsHandler.RegisterAmplifiers(roundAmp3);
 
-            testEventWithInt.Invoke(1);
-
-            Debug.LogWarning("Invoked 1");
-
-            testEventWithInt.Invoke(2);
-
-            Debug.LogWarning("Invoked 2");
-
-            subscriptionList.Add(testEventWithoutParam.RegisterListener(new(TestMethodParameterless)));
-            subscriptionList.Add(testEventWithoutParam.RegisterListener(new(TestMethodParameterless, true)));
-
-            testEventWithoutParam.Invoke();
-
-            Debug.LogWarning("Invoked");
-
-            testEventWithoutParam.Invoke();
-
-            Debug.LogWarning("Invoked");
-
-            subscriptionList.UnsubscribeAll();
-            Debug.LogWarning("Unsub");
-
-            testEventWithInt.Invoke(1);
-            testEventWithoutParam.Invoke();
+            StatsHandler statsHandler1 = new(new());
+            statsHandler1.AddAmplifierSystem(statsHandler);
+            Debug.Log(statsHandler.amplifierSystem.GetStatDatas().Values.ToArray()[0].GetDisplayString());
+            statsHandler.TryGetAttributeValue(SOContainerContainer.StatSOContainer.damage, out var value);
+            Debug.Log(value);
         }
 
-        private void TestMethod(int testValue)
-        {
-            Debug.Log($"TestMethod called with: {testValue}");
-        }
-
-        private void TestMethodParameterless()
-        {
-            Debug.Log($"TestMethodParameterless called");
-        }
-
-        private void TestMethodParameterlessFirstOrder()
-        {
-            Debug.Log($"Fist called");
-        }
-
-        private void TestMethodParameterlessLastOrder()
-        {
-            Debug.Log($"Last called");
-        }
+        
     }
 }

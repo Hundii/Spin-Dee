@@ -4,71 +4,9 @@ using System.Linq;
 
 namespace Common
 {
-    public class AmplifierSystem
+    public class AmplifierSystem: IAmplifierSystemOwner
     {
-        protected class AmplifierValues
-        {
-            public double baseValue;
-            public double additiveValue;
-            public double additiveMultiplier;
-            public double trueMuliplier;
-
-            public AmplifierValues()
-            {
-                
-            }
-
-            public AmplifierValues(double baseValue)
-            {
-                this.baseValue = baseValue;
-                additiveValue = 0;
-                additiveMultiplier = 1;
-                trueMuliplier = 1;
-            }
-
-            public void Reset()
-            {
-                additiveValue = 0;
-                additiveMultiplier = 1;
-                trueMuliplier = 1;
-            }
-            public void RegisterAmplifier(Amplifier amplifier)
-            {
-                switch (amplifier.amplifierType)
-                {
-                    case AmplifierType.Plus:
-                        additiveValue += amplifier.value;
-                        break;
-                    case AmplifierType.AdditivePercentage:
-                        additiveMultiplier += amplifier.value / 100;
-                        break;
-                    case AmplifierType.TruePercentage:
-                        trueMuliplier *= 1 + amplifier.value / 100;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            public double GetBuffedValue()
-            {
-                return (baseValue + additiveValue) * additiveMultiplier * trueMuliplier;
-            }
-
-            public AmplifierValues Add(AmplifierValues other)
-            {
-                AmplifierValues addedValues = new()
-                {
-                    baseValue = baseValue + other.baseValue,
-                    additiveValue = additiveValue + other.additiveValue,
-                    additiveMultiplier = additiveMultiplier + (other.additiveMultiplier - 1),
-                    trueMuliplier = trueMuliplier * other.trueMuliplier
-                };
-
-                return addedValues;
-            }
-        }
-
-        private readonly Dictionary<Stat, AmplifierValues> statDatas = new();
+        private readonly Dictionary<Stat, AmplifierSystemData> statDatas = new();
         private readonly Dictionary<string, Amplifier> amplifiers = new();
         private readonly Dictionary<Amplifier, int> amplifierStacking = new();
 
@@ -201,23 +139,38 @@ namespace Common
             otherAmplifierSystems = amplifierSystems;
         }
 
-        protected Dictionary<Stat,AmplifierValues> GetStatDatas()
+        public void AddAmplifierSystem(AmplifierSystem amplifierSystem)
+        {
+            otherAmplifierSystems.Add(amplifierSystem);
+        }
+
+        public void RemoveAmplifierSystem(AmplifierSystem amplifierSystem)
+        {
+            otherAmplifierSystems.Remove(amplifierSystem);
+        }
+
+        public void ClearOtherAmplifierSystems()
+        {
+            otherAmplifierSystems = new();
+        }
+
+        public Dictionary<Stat, AmplifierSystemData> GetStatDatas()
         {
             return statDatas;
         }
 
         public bool TryGetBuffedAttributeValue(Stat stat, out double value)
         {
-            AmplifierValues addedValues = new(0);
-            //foreach (var otherSystems in otherAmplifierSystems)
-            //{
-            //    var statData = otherSystems.GetStatDatas();
-            //    if (statData.TryGetValue(stat, out AmplifierValues ampValues))
-            //    {
-            //        addedValues = ampValues.Add(addedValues);
-            //    }
-            //}
-            if (statDatas.TryGetValue(stat, out AmplifierValues values))
+            AmplifierSystemData addedValues = new(0);
+            foreach (var otherSystems in otherAmplifierSystems)
+            {
+                var statData = otherSystems.GetStatDatas();
+                if (statData.TryGetValue(stat, out AmplifierSystemData ampValues))
+                {
+                    addedValues = ampValues.Add(addedValues);
+                }
+            }
+            if (statDatas.TryGetValue(stat, out AmplifierSystemData values))
             {
                 addedValues = addedValues.Add(values);
                 value = addedValues.GetBuffedValue();
@@ -225,6 +178,11 @@ namespace Common
             }
             value = -1;
             return false;
+        }
+
+        public AmplifierSystem GetAmplifierSystem()
+        {
+            return this;
         }
     }
 }

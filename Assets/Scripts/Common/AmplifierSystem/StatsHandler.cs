@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Common
 {
-    public class StatsHandler
+    public class StatsHandler : IAmplifierSystemOwner
     {
-        protected AmplifierSystem amplifierSystem;
+        public AmplifierSystem amplifierSystem;
         public Action valueChanged;
 
         public StatsHandler()
@@ -55,19 +55,29 @@ namespace Common
             valueChanged?.Invoke();
         }
 
-        public AmplifierSystem GetAmplifierSystem()
+        public void SetOtherAmplifierSystem(IAmplifierSystemOwner amplifierSystemOwner)
         {
-            return amplifierSystem;
+            amplifierSystem.SetOtherAmplifierSystems(new() { amplifierSystemOwner.GetAmplifierSystem() });
         }
 
-        public void SetOtherAmplifierSystem(StatsHandler statsHandler)
+        public void AddAmplifierSystem(IAmplifierSystemOwner amplifierSystemOwner)
         {
-            amplifierSystem.SetOtherAmplifierSystems(new() { statsHandler.GetAmplifierSystem() });
+            amplifierSystem.AddAmplifierSystem(amplifierSystemOwner.GetAmplifierSystem());
+        }
+
+        public void RemoveAmplifierSystem(IAmplifierSystemOwner amplifierSystemOwner)
+        {
+            amplifierSystem.RemoveAmplifierSystem(amplifierSystemOwner.GetAmplifierSystem());
         }
 
         public void ClearOtherAmplifierSystems()
         {
-            amplifierSystem.SetOtherAmplifierSystems(new());
+            amplifierSystem.ClearOtherAmplifierSystems();
+        }
+
+        public AmplifierSystem GetAmplifierSystem()
+        {
+            return amplifierSystem;
         }
     }
 }
