@@ -50,17 +50,11 @@ namespace Common
             return (baseValue + additiveValue) * additiveMultiplier * trueMuliplier;
         }
 
-        public AmplifierSystemData Add(AmplifierSystemData other)
+        public void Add(AmplifierSystemData other)
         {
-            AmplifierSystemData addedValues = new()
-            {
-                baseValue = baseValue + other.baseValue,
-                additiveValue = additiveValue + other.additiveValue,
-                additiveMultiplier = additiveMultiplier + (other.additiveMultiplier - 1),
-                trueMuliplier = trueMuliplier * other.trueMuliplier
-            };
-
-            return addedValues;
+            additiveValue += other.additiveValue;
+            additiveMultiplier += other.additiveMultiplier - 1;
+            trueMuliplier *= other.trueMuliplier;
         }
 
         public string GetDisplayString()

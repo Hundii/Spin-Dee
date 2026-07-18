@@ -16,15 +16,16 @@ namespace Common
         {
             
         }
-        public AmplifierSystem(IEnumerable<Stat> stats, IEnumerable<double> values)
+        public AmplifierSystem(ICollection<Stat> stats, ICollection<double> values)
         {
-            var statList = stats.ToList();
-            var valueList = values.ToList();
-
-            for (int i = 0; i < statList.Count; i++)
+            for (int i = 0; i < stats.Count; i++)
             {
-                statDatas.TryAdd(statList[i], new(valueList[i]));
+                statDatas.TryAdd(stats.ElementAt(i), new(values.ElementAt(i)));
             }
+        }
+
+        public AmplifierSystem(ICollection<StatSelector> stats) : this(stats.Select(x=>x.stat).ToArray(),stats.Select(x=>x.value).ToArray())
+        {
         }
 
         public AmplifierSystem(ICollection<Stat> stats)
@@ -61,7 +62,6 @@ namespace Common
             if (!statDatas.ContainsKey(amplifier.stat))
             {
                 RegisterStat(amplifier.stat,amplifier.stat.defaultValue);
-                return;
             }
             if (amplifiers.TryAdd(amplifier.uniqueTag, amplifier))
             {
@@ -162,17 +162,26 @@ namespace Common
         public bool TryGetBuffedAttributeValue(Stat stat, out double value)
         {
             AmplifierSystemData addedValues = new(0);
+            bool hasOtherData = false;
             foreach (var otherSystems in otherAmplifierSystems)
             {
                 var statData = otherSystems.GetStatDatas();
                 if (statData.TryGetValue(stat, out AmplifierSystemData ampValues))
                 {
-                    addedValues = ampValues.Add(addedValues);
+                    addedValues.Add(ampValues);
+                    hasOtherData = true;
                 }
             }
             if (statDatas.TryGetValue(stat, out AmplifierSystemData values))
             {
-                addedValues = addedValues.Add(values);
+                addedValues.Add(values);
+                addedValues.baseValue = values.baseValue;
+                value = addedValues.GetBuffedValue();
+                return true;
+            }
+            if (hasOtherData)
+            {
+                addedValues.baseValue = stat.defaultValue;
                 value = addedValues.GetBuffedValue();
                 return true;
             }

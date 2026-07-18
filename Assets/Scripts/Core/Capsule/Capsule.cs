@@ -26,7 +26,7 @@ namespace Core
             capsuleStatsSO = capsuleSO == null ? SOContainerContainer.CapsuleSOContainer.glitch : capsuleSO;
             meshRenderer.material = capsuleStatsSO.capsuleMaterial;
 
-            StatsHandler = new(new(capsuleStatsSO.stats.Select(x=>x.stat),capsuleStatsSO.stats.Select(x=>x.value)));
+            StatsHandler = new(new(capsuleStatsSO.stats));
 
             this.Inject<PlayerManager>().RegisterPlayer(this);
         }

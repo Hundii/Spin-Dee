@@ -44,8 +44,19 @@ namespace Core
 
             StatsHandler statsHandler1 = new(new());
             statsHandler1.AddAmplifierSystem(statsHandler);
+            Amplifier amp = new()
+            {
+                amplifierScope = AmplifierScope.All,
+                amplifierType = AmplifierType.Plus,
+                stat = SOContainerContainer.StatSOContainer.damage,
+                stackCount = 100000,
+                value = 10,
+                uniqueTag = "Amp buff"
+            };
+            statsHandler1.RegisterAmplifiers(amp);
             Debug.Log(statsHandler.amplifierSystem.GetStatDatas().Values.ToArray()[0].GetDisplayString());
-            statsHandler.TryGetAttributeValue(SOContainerContainer.StatSOContainer.damage, out var value);
+            Debug.Log(statsHandler1.amplifierSystem.GetStatDatas().Values.ToArray()[0].GetDisplayString());
+            statsHandler1.TryGetAttributeValue(SOContainerContainer.StatSOContainer.damage, out var value);
             Debug.Log(value);
         }
 

@@ -12,11 +12,13 @@ public partial class HarvesterStatsSOContainer : GeneratedSOContainer
 {
 public HarvesterStatsSO[] harvesterStatsSOArray;
 public HarvesterStatsSO basic;
+public HarvesterStatsSO basicMicrobe;
 #if UNITY_EDITOR
 public override void FindReferences()
 {HarvesterStatsSO[] objects = Resources.LoadAll<HarvesterStatsSO>("");
 harvesterStatsSOArray = objects;
-basic = objects.Where(x=>x.name == "Basic").First();
+basic = objects.First(x=>x.name == "Basic");
+basicMicrobe = objects.First(x=>x.name == "Basic Microbe");
 EditorUtility.SetDirty(this);
 }
 #endif

@@ -24,7 +24,7 @@ namespace Core
 
         private void Awake()
         {
-            statsHandler = new(new(microbeSO.microbeStats.stats.Select(x => x.stat), microbeSO.microbeStats.stats.Select(x => x.value)));
+            statsHandler = new(new(microbeSO.microbeStats.stats));
             HealthSystem = new();
 
             harvesters = GetComponentsInChildren<Harvester>();

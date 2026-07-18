@@ -46,7 +46,7 @@ namespace Common
             content.Append($"{className.ToPascalCase()}Array = objects;\n");
             foreach (var obj in objects)
             {
-                content.Append($"{obj.name.ToPascalCase()} = objects.Where(x=>x.name == \"{obj.name}\").First();\n");
+                content.Append($"{obj.name.ToPascalCase()} = objects.First(x=>x.name == \"{obj.name}\");\n");
             }
             content.Append("EditorUtility.SetDirty(this);\n");
             content.Append("}\n");
