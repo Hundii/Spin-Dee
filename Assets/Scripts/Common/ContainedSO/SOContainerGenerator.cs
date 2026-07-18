@@ -7,28 +7,10 @@ namespace Common
 {
     public static class SOContainerGenerator
     {
-        private const string configPrefix = "SOContainerGenerator:";
-        public static readonly string FolderPath = Utility.NormalizeFilePath(ConfigService.Instance.GetValue(configPrefix + "FolderPath"));
-        public static readonly string Namespace = ConfigService.Instance.GetValue(configPrefix + "Namespace");
-        public static readonly string MenuName = Utility.NormalizeFilePath(ConfigService.Instance.GetValue(configPrefix + "MenuName"));
 #if UNITY_EDITOR
-        private static string GetDefaultFolderPath(bool wholePath = false)
-        {
-            var g = AssetDatabase.FindAssets($"t:Script {nameof(SOContainerGenerator)}");
-            string fullPath = AssetDatabase.GUIDToAssetPath(g[0]);
-            if (wholePath)
-            {
-                return fullPath;
-            }
-            var parts = fullPath.Split('/');
-            StringBuilder path = new(50);
-            for (int i = 0; i < parts.Length - 1; i++)
-            {
-                path.Append(parts[i] + '/');
-            }
-            path.Append("Generated/");
-            return path.ToString();
-        }
+        public static readonly string FolderPath = Utility.NormalizeFilePath(CommonConfig.instance.generatedScriptFolderPath);
+        public static readonly string Namespace = CommonConfig.instance.generatedSCriptNameSpace;
+        public static readonly string MenuName = Utility.NormalizeFilePath(CommonConfig.instance.generatedScriptableObjectMenuName);
         private static string GetFolderPathOfClass<T>()
         {
             var guid = AssetDatabase.FindAssets($"t:Script {typeof(T).Name}");
@@ -78,9 +60,7 @@ namespace Common
                 {
                     File.Delete($"{folderPath}/{fullClassName}.cs");
                 }
-                StreamWriter streamWriter = new($"{folderPath}/{fullClassName}.cs");
-                streamWriter.Write(content.ToString());
-                streamWriter.Close();
+                File.WriteAllText($"{folderPath}/{fullClassName}.cs", content.ToString());
                 AssetDatabase.Refresh();
             }
             catch (System.Exception e)
@@ -89,6 +69,28 @@ namespace Common
                 Debug.LogError(e.Message);
                 Debug.LogError(content.ToString());
             }
+        }
+
+        public static Object SelectContainer<T>()
+        {
+            string className = typeof(T).Name;
+            string fullClassName = className.EndsWith("SO")
+                    ? className + "Container"
+                    : className + "SOContainer";
+
+            var guids = AssetDatabase.FindAssets($"t:{fullClassName}");
+
+            if (guids.Length > 0)
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                Object asset = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
+                return asset;
+            }
+            else
+            {
+                Debug.LogWarning($"No container asset found for {fullClassName}");
+            }
+            return null;
         }
 #endif
     }

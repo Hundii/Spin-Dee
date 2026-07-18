@@ -32,6 +32,14 @@ namespace Common.Editor
                 var genericMethod = method.MakeGenericMethod(derivedType);
                 genericMethod.Invoke(target, new object[] { str.ToString() });
             }
+            if (GUILayout.Button("Jump to Container"))
+            {
+                var method = typeof(ContainedSO).GetMethod("SelectContainer");
+                var genericMethod = method.MakeGenericMethod(derivedType);
+                var asset = (UnityEngine.Object)genericMethod.Invoke(target, new object[] { });
+                Selection.activeObject = asset;
+                EditorGUIUtility.PingObject(asset);
+            }
         }
     }
 }

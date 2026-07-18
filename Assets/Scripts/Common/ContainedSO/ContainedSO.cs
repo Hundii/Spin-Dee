@@ -27,6 +27,11 @@ namespace Common
         {
             SOContainerGenerator.CreateScript<T>(contentPath);
         }
+
+        public Object SelectContainer<T>() where T : Object
+        {
+            return SOContainerGenerator.SelectContainer<T>();
+        }
 #endif
     }
 }

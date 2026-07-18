@@ -1,7 +1,0 @@
-{
-  "SOContainerGenerator": {
-    "FolderPath": "Assets/Scripts/Core/Generated/",
-    "Namespace": "Core.Generated",
-    "MenuName": "Common/SOContainer"
-  }
-}
